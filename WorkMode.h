@@ -18,7 +18,6 @@
 #include <windows.h>
 #include "IniFiles.hpp"
 #include <ImgList.hpp>
-#include "Solenoid.h"
 #include "DataAquirer.h"
 
 // ! @brief Класс, обеспечивающий прохождение всего технологического цикла
@@ -49,10 +48,8 @@ private:
 	void pr(AnsiString _msg);
 	__fastcall void AddTickStrobe(unsigned int _tick);
 	bool result;
-	Solenoid* ThickSolenoid;
 	TIniFile *ini;
 	void WorkMode(void);
-	inline int getvolt(void){return(ThickSolenoid->getchVoltage());};
 	ADCBoards* adcboards;
 public:
 	__fastcall WorkThreadClass(RawStrobes* _rawStrobes,TIniFile* _ini, ADCBoards* _adcBoards);

@@ -6,7 +6,7 @@
 #include "WorkMode.h"
 #include "Main.h"
 #include "Protocol.h"
-#include "LCARD502.h"
+//#include "LCARD502.h"
 #include "A1730.h"
 // ---------------------------------------------------------------------------
 
@@ -23,14 +23,12 @@ __fastcall WorkThreadClass::WorkThreadClass(RawStrobes* _rawStrobes,
 	TIniFile* _ini, ADCBoards* _adcboards)
 {
 	rawStrobes = _rawStrobes;
-	ThickSolenoid = new Solenoid(_ini);
 	ini = _ini;
 	adcboards = _adcboards;
 }
 
 __fastcall WorkThreadClass::~WorkThreadClass(void)
 {
-	delete ThickSolenoid;
 }
 
 void __fastcall WorkThreadClass::Execute()
@@ -43,15 +41,6 @@ void __fastcall WorkThreadClass::Execute()
 	a1730->oPCHPOW->Set(true);
 	adcboards->initSettings(&Globals_adcSettings);
 	pr("Инициализировали руднев шиляев");
-	AnsiString a;
-	a = "0 getchVoltage()=";
-	a += ThickSolenoid->getchVoltage();
-	pr(a);
-	WorkMode();
-	a = "1 getchVoltage()=";
-	a += ThickSolenoid->getchVoltage();
-	pr(a);
-	return;
 }
 
 void WorkThreadClass::WorkMode(void)
