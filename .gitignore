@@ -1,0 +1,15 @@
+__history/
+*.obj
+Debug/*.exe
+doc/
+help/
+Protocols/*.txt
+Debug/Win32/*.exe
+*.ils
+*.ild
+*.ilf
+*.ilc
+*.map
+*.fds
+*.tds
+*.dkb
