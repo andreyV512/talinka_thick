@@ -81,6 +81,12 @@ A1730::A1730(int _DevNum, AnsiString _file_name, TIniFile* _ini)
 	oSHIFT = Find("Перекладка");
 	oSTROBE = Find("Строб");
 	oRESULT = Find("Результат");
+
+	oSTF = Find("STF");
+	oRL  = Find("RL");
+	oRM  = Find("RM");
+    oRH  = Find("RH");
+
 	alarmCycleOn = false;
 	OnFront = NULL;
 	IsAlarm = false;

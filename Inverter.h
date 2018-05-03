@@ -39,6 +39,7 @@ class Inverter
 		void OnProtocol(AnsiString _msg);
 };
 //------------------------------------------------------------------------------
+/*
 class rotationThread: public TThread
 {
 	protected:
@@ -51,6 +52,7 @@ class rotationThread: public TThread
 		TCriticalSection* cs;
 		bool isStop;
 };
+*/
 extern Inverter *frConverter;
 //------------------------------------------------------------------------------
 

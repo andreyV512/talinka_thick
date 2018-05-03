@@ -75,6 +75,11 @@ public:
 	CSignal* oSTROBE; // Строб
 	CSignal* oRESULT; // Результат
 
+	CSignal *oSTF;       //  стакт продольника
+	CSignal *oRL;        //  код скорости 0
+	CSignal *oRM;        //  код скорости 1
+	CSignal *oRH;        //  код скорости 2
+
 	inline int SignalCount(void)
 	{
 		return (M.Count());

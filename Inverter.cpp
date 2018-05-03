@@ -5,6 +5,7 @@
 #include "Inverter.h"
 #include "Global.h"
 #include "Protocol.h"
+#include "A1730.h"
 
 // ------------------------------------------------------------------------------
 
@@ -12,6 +13,7 @@
 Inverter *frConverter;
 Inverter::Inverter(TIniFile* ini)
 {
+/*
 	AnsiString section="Default";
 	if(!ini->ValueExists(section,"InverterAbonent"))
 		ini->WriteInteger(section,"InverterAbonent",1);
@@ -52,17 +54,21 @@ Inverter::Inverter(TIniFile* ini)
 	testThread=NULL;
 	inverter->Open();
 	cs=new TCriticalSection();
+	*/
 }
 Inverter::~Inverter()
 {
+/*
 	if(testThread!=NULL)
 		testThread->Stop();
 	delete cs;
 	delete inverter;
+	*/
 }
 // ------------------------------------------------------------------------------
 bool Inverter::setParameterSpeed(int number,int value)
 {
+/*
 	if((number<4)||(number>6))
 		return false;
 	bool ret;
@@ -72,10 +78,17 @@ bool Inverter::setParameterSpeed(int number,int value)
 	}
 	cs->Leave();
 	return ret;
+	*/
+	if((unsigned)value > 7) value = 7;
+	a1730->oRL->Set(0 != (value & 1));
+	a1730->oRM->Set(0 != (value & 2));
+	a1730->oRH->Set(0 != (value & 4));
+	return true;
 }
 // ------------------------------------------------------------------------------
 int Inverter::getParameterSpeed(int number)
 {
+/*
 	int ret;
 	cs->Enter();
 	{
@@ -83,10 +96,17 @@ int Inverter::getParameterSpeed(int number)
 	}
 	cs->Leave();
 	return (ret);
+	*/
+	unsigned t = (a1730->oRL->Get() ? 1: 0)
+			   | (a1730->oRM->Get() ? 2: 0)
+			   | (a1730->oRH->Get() ? 4: 0)
+	;
+	return t;
 }
 // ------------------------------------------------------------------------------
 bool Inverter::startRotation()
 {
+/*
 //	ResetErrors();
 	if(testThread!=NULL)
 		return(true);
@@ -110,10 +130,14 @@ bool Inverter::startRotation()
 	}
 	testThread=new rotationThread(inverter,cs);
 	return true;
+	*/
+	a1730->oSTF->Set(true);
+	return true;
 }
 // ------------------------------------------------------------------------------
 bool Inverter::stopRotation()
 {
+/*
 	if(testThread==NULL)
 		return(true);
 	bool ret;
@@ -133,10 +157,18 @@ bool Inverter::stopRotation()
 		return false;
 	}
 	return true;
+	*/
+	a1730->oSTF->Set(false);
+
+	a1730->oRL->Set(false);
+	a1730->oRM->Set(false);
+	a1730->oRH->Set(false);
+	return true;
 }
 // ------------------------------------------------------------------------------
 bool Inverter::NETManage()
 {
+/*
 	bool ret;
 	cs->Enter();
 	{
@@ -144,10 +176,13 @@ bool Inverter::NETManage()
 	}
 	cs->Leave();
 	return ret;
+	*/
+	return true;
 }
 // ------------------------------------------------------------------------------
 bool Inverter::ResetErrors()
 {
+/*
 	bool ret;
 	cs->Enter();
 	{
@@ -155,9 +190,12 @@ bool Inverter::ResetErrors()
 	}
 	cs->Leave();
 	return ret;
+	*/
+	return true;
 }
 bool Inverter::stateRead()
 {
+/*
 	bool ret;
 	cs->Enter();
 	{
@@ -165,12 +203,14 @@ bool Inverter::stateRead()
 	}
 	cs->Leave();
 	return ret;
+	*/
+	return true;
 }
 void Inverter::OnProtocol(AnsiString _msg)
 {
 	TPr::pr(_msg);
 }
-
+ /*
 // ==============================================================================
 __fastcall rotationThread::rotationThread(CInv* _inv,TCriticalSection* _cs)
 {
@@ -203,4 +243,5 @@ void __fastcall rotationThread::Execute()
 	}
 }
 // ------------------------------------------------------------------------------
+*/
 
