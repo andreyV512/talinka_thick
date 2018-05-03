@@ -147,12 +147,12 @@ void __fastcall TSettingsForm::bCreateTypeSizeClick(TObject *Sender)
 		for (int i = 1; i < ValueListEditor->RowCount; i++)
 			ValueListEditor->Cells[1][i] = "";
 		// даЄм возможность выбора диаметра только из предложенных значений
-		ValueListEditor->ItemProps[1]->PickList->Add("48");
+	  //	ValueListEditor->ItemProps[1]->PickList->Add("48");
 		ValueListEditor->ItemProps[1]->EditStyle = esPickList;
 		ValueListEditor->ItemProps[1]->PickList->Add("60");
 		ValueListEditor->ItemProps[1]->PickList->Add("73");
 		ValueListEditor->ItemProps[1]->PickList->Add("89");
-		ValueListEditor->ItemProps[1]->PickList->Add("114");
+ //		ValueListEditor->ItemProps[1]->PickList->Add("114");
 		cbTypeSize->Enabled = false;
 		bDeleteTypeSize->Enabled = false;
 		bCreateTypeSize->Caption = "ѕодтвердить";
