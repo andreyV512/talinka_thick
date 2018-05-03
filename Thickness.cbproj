@@ -268,10 +268,6 @@
 				<DependentOn>SMS.h</DependentOn>
 				<BuildOrder>32</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="Solenoid.cpp">
-				<DependentOn>Solenoid.h</DependentOn>
-				<BuildOrder>49</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="TestMode.cpp">
 				<DependentOn>TestMode.h</DependentOn>
 				<BuildOrder>50</BuildOrder>
@@ -327,11 +323,11 @@
 			<FormResources Include="Protocol.dfm"/>
 			<FormResources Include="SettingsADC.dfm"/>
 			<FormResources Include="Settings.dfm"/>
-			<FormResources Include="Manage.dfm"/>
 			<FormResources Include="UTFSpectro.dfm"/>
 			<FormResources Include="uFRSetADC.dfm"/>
 			<FormResources Include="ViewTubeDetails.dfm"/>
 			<FormResources Include="View.dfm"/>
+			<FormResources Include="Manage.dfm"/>
 			<FormResources Include="A1730\uFRSigPanel.dfm"/>
 			<FormResources Include="A1730\SignalsState.dfm"/>
 			<FormResources Include="Main.dfm"/>

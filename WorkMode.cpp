@@ -124,22 +124,7 @@ void WorkThreadClass::WorkMode(void)
 			break;
 		}
 		Sleep(500);
-		pr("включим питание соленоидов");
-		a1730->oSOLPOW->Set(true);
-		Sleep(1000);
-		pr(ThickSolenoid->GetUIR());
-		if (!ThickSolenoid->OkU())
-		{
-			reason = "Напряжение соленоидов вне диапозона - АВАРИЯ!!!";
-			a1730->oSOLPOW->Set(false);
-			break;
-		}
-		if (!ThickSolenoid->OkResist())
-		{
-			reason = "Сопротивление соленоидов возрасло - ПЕРЕГРЕВ!!!";
-			a1730->oSOLPOW->Set(false);
-			break;
-		}
+
 		pr("выставляем сигнал Работа");
 		a1730->oWORK->Set(true);
 		pr("Стартуем платы");

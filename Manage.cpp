@@ -9,7 +9,7 @@
 #include "Global.h"
 #include "uFunctions.h"
 #include "Protocol.h"
-#include "LCARD502.h"
+//#include "LCARD502.h"
 #include "A1730.h"
 // ---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -68,18 +68,9 @@ void __fastcall TManageForm::FormShow(TObject *Sender)
 	eFriquencyRot->Text =
 		IntToStr(frConverter->getParameterSpeed(Globals_defaultRotParameter));
 	// включаем таймер, отслеживающий состояние входов и выходов
-	InputTimer->Enabled = true;
 	butt_enabled = true;
-	bPowerSU->Checked = a1730->oSOLPOW->Get();
 	StatusBarBottom->Panels->Items[0]->Text = "";
 	StatusBarBottom->Refresh();
-}
-
-// ---------------------------------------------------------------------------
-void __fastcall TManageForm::FormClose(TObject *Sender, TCloseAction &Action)
-{
-	// выключаем таймер, отслеживающий состояние входов и выходов
-	InputTimer->Enabled = false;
 }
 
 // ---------------------------------------------------------------------------
@@ -168,50 +159,6 @@ void TManageForm::ShowModuleState(byte state, TBitBtn *btn, TPanel *pan)
 }
 // ---------------------------------------------------------------------------
 
-void __fastcall TManageForm::InputTimerTimer(TObject *Sender)
-{
-	if (bPowerSU->Checked)
-	{
-		// смотрим ток, напряжение и температуру соленоида
-		eAmperage->Text = FloatToStrF(ThickSolenoid->getAmperage(),
-			ffFixed, 4, 3);
-		eVoltage->Text = FloatToStrF(ThickSolenoid->getVoltage(),
-			ffFixed, 3, 3);
-		double lresist = ThickSolenoid->getResist();
-		if (lresist < 0)
-			lresist = -lresist;
-		eTemperature->Text = FloatToStrF(lresist, ffFixed, 3, 1);
-		if (!ThickSolenoid->OkU())
-		{
-			a1730->oSOLPOW->Set(false);
-			StatusBarBottom->Panels->Items[0]->Text =
-				"Напряжение вне диапозона";
-			StatusBarBottom->Refresh();
-			eTemperature->Text = "";
-			// bPowerSU->Checked=false;
-		}
-		else if (!ThickSolenoid->OkResist())
-		{
-			eTemperature->Text = FloatToStrF(lresist, ffFixed, 3, 1);
-			//a1730->oSOLPOW->Set(false);
-			StatusBarBottom->Panels->Items[0]->Text =
-				"Превышено сопротивление обмотки";
-			StatusBarBottom->Refresh();
-			//eTemperature->Text = "";
-			// bPowerSU->Checked=false;
-		}
-		else
-			eTemperature->Text = FloatToStrF(lresist, ffFixed, 3, 1);
-	}
-	else
-	{
-		// eAmperage->Text = "";
-		// eVoltage->Text = "";
-		// eTemperature->Text = "";
-	}
-}
-
-// ---------------------------------------------------------------------------
 void __fastcall TManageForm::FormDestroy(TObject *Sender)
 {
 	delete centr_cl;
@@ -219,7 +166,6 @@ void __fastcall TManageForm::FormDestroy(TObject *Sender)
 	delete mod_serv;
 	delete mod_wrk;
 	delete mod_mvg;
-	delete ThickSolenoid;
 	SaveFormPos(this, ini);
 }
 // ---------------------------------------------------------------------------
@@ -307,33 +253,9 @@ void __fastcall TManageForm::bRotationClick(TObject *Sender)
 }
 // ---------------------------------------------------------------------------
 
-void __fastcall TManageForm::bPowerSUClick(TObject *Sender)
-{
-	a1730->oSOLPOW->Set(((TCheckBox*)Sender)->Checked);
-	if (((TCheckBox*)Sender)->Checked)
-	{
-		eTemperature->Enabled = true;
-		eAmperage->Enabled = true;
-		eVoltage->Enabled = true;
-	}
-	else
-	{
-		StatusBarBottom->Panels->Items[0]->Text = "";
-		StatusBarBottom->Refresh();
-		eTemperature->Enabled = false;
-		eAmperage->Enabled = false;
-		eVoltage->Enabled = false;
-	}
-
-}
-// ---------------------------------------------------------------------------
 
 void __fastcall TManageForm::FormCreate(TObject * Sender)
 {
 	LoadFormPos(this, ini);
-	eTemperature->Enabled = false;
-	eAmperage->Enabled = false;
-	eVoltage->Enabled = false;
-	ThickSolenoid = new Solenoid(ini);
 }
 // ---------------------------------------------------------------------------

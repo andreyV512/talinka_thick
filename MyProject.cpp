@@ -9,11 +9,11 @@
 USEFORM("Protocol.cpp", Pr);
 USEFORM("SettingsADC.cpp", FormSettADC);
 USEFORM("Settings.cpp", SettingsForm);
-USEFORM("Manage.cpp", ManageForm);
 USEFORM("UTFSpectro.cpp", FSpectro);
 USEFORM("uFRSetADC.cpp", FRSetADC); /* TFrame: File Type */
 USEFORM("ViewTubeDetails.cpp", ViewTubeDetailsForm);
 USEFORM("View.cpp", ViewForm);
+USEFORM("Manage.cpp", ManageForm);
 USEFORM("A1730\uFRSigPanel.cpp", FRSigPanel); /* TFrame: File Type */
 USEFORM("A1730\SignalsState.cpp", SignalsStateForm);
 USEFORM("Main.cpp", MainForm);

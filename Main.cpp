@@ -9,7 +9,7 @@
 #include "SignalsState.h"
 #include "DataAquirer.h"
 #include "uFunctions.h"
-#include "LCARD502.h"
+//#include "LCARD502.h"
 #include "Protocol.h"
 #include "A1730.h"
 
@@ -73,7 +73,7 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
 	a1730->oSCANPOW->Set(false);
 	a1730->oMEAS->Set(false);
 	SetControlsAble(true);
-	lcard=new LCard502();
+   //	lcard=new LCard502();
 	SetControlsAble(true);
 	frConverter=new Inverter(ini);
 	Sleep(1000);
@@ -222,7 +222,7 @@ void __fastcall TMainForm::FormDestroy(TObject *Sender)
 	TPr::Dispose();
 	SaveFormPos(this,ini);
 	delete ini;
-	delete lcard;
+  //	delete lcard;
 }
 
 // ---------------------------------------------------------------------------

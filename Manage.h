@@ -13,7 +13,6 @@
 
 #include <ComCtrls.hpp>
 #include <IniFiles.hpp>
-#include "Solenoid.h"
 //---------------------------------------------------------------------------
 class TManageForm : public TForm
 {
@@ -21,24 +20,12 @@ __published:	// IDE-managed Components
 	TGroupBox *gbThickness;
 	TStatusBar *StatusBarBottom;
 	TBitBtn *bRotation;
-	TTimer *InputTimer;
-	TCheckBox *bPowerSU;
-	TPanel *pSolenoid;
-	TLabel *Label1;
-	TLabel *Label2;
-	TLabel *Label3;
-	TEdit *eAmperage;
-	TEdit *eVoltage;
-	TEdit *eTemperature;
 	TEdit *eFriquencyRot;
 	TLabel *Label4;
-	void __fastcall InputTimerTimer(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
-	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall FormKeyPress(TObject *Sender, wchar_t &Key);
 	void __fastcall FormDestroy(TObject *Sender);
 	void __fastcall bRotationClick(TObject *Sender);
-	void __fastcall bPowerSUClick(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
 
 private:	// User declarations
@@ -60,7 +47,7 @@ private:	// User declarations
 	Graphics::TBitmap *centr_cl, *centr_op;			// рисунки для кнопок центраторов
 	Graphics::TBitmap *mod_serv, *mod_wrk,*mod_mvg;	// рисунки для кнопок мены состояния модулей
 	TIniFile* ini;
-	Solenoid* ThickSolenoid;
+   //	Solenoid* ThickSolenoid;
 
 public:		// User declarations
 
