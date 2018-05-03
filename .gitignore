@@ -13,3 +13,4 @@ Debug/Win32/*.exe
 *.fds
 *.tds
 *.dkb
+deb/Win32/

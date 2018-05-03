@@ -4,7 +4,7 @@
 			<ProjectVersion>12.2</ProjectVersion>
 			<MainSource>MyProject.cpp</MainSource>
 			<Base>True</Base>
-			<Config Condition="'$(Config)'==''">Debug</Config>
+			<Config Condition="'$(Config)'==''">deb</Config>
 			<Platform>Win32</Platform>
 			<AppType>Application</AppType>
 			<FrameworkType>VCL</FrameworkType>
@@ -15,6 +15,12 @@
 		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
 			<Cfg_1>true</Cfg_1>
 			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='deb' or '$(Cfg_3)'!=''">
+			<Cfg_3>true</Cfg_3>
+			<CfgParent>Cfg_1</CfgParent>
+			<Cfg_1>true</Cfg_1>
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
@@ -77,6 +83,9 @@
 			<BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
 			<ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
 		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_3)'!=''">
+			<BCC_Defines>NO1730;NO_ADCBOARDS;$(BCC_Defines)</BCC_Defines>
+		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_2)'!=''">
 			<BCC_wmls>false</BCC_wmls>
 			<BCC_wiip>false</BCC_wiip>
@@ -103,14 +112,14 @@
 				<DependentOn>A1730\Latch.h</DependentOn>
 				<BuildOrder>43</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="A1730\Signal.cpp">
-				<DependentOn>A1730\Signal.h</DependentOn>
-				<BuildOrder>45</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="A1730\SignalsState.cpp">
 				<Form>SignalsStateForm</Form>
 				<DependentOn>A1730\SignalsState.h</DependentOn>
 				<BuildOrder>42</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="A1730\SignalX.cpp">
+				<DependentOn>A1730\SignalX.h</DependentOn>
+				<BuildOrder>45</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="A1730\uFRSigPanel.cpp">
 				<Form>FRSigPanel</Form>
@@ -194,10 +203,6 @@
 			<CppCompile Include="L10M8PCI_SDK2\CL10M8PCI_SDK2.cpp">
 				<DependentOn>L10M8PCI_SDK2\CL10M8PCI_SDK2.h</DependentOn>
 				<BuildOrder>52</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="LCARD502.cpp">
-				<DependentOn>LCARD502.h</DependentOn>
-				<BuildOrder>41</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="Main.cpp">
 				<Form>MainForm</Form>
@@ -334,6 +339,10 @@
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="deb">
+				<Key>Cfg_3</Key>
+				<CfgParent>Cfg_1</CfgParent>
 			</BuildConfiguration>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>

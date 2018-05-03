@@ -13,6 +13,7 @@ A1730::A1730(int _DevNum, AnsiString _file_name, TIniFile* _ini)
 	startPort = 0;
 	portCount = 4;
 	ErrorCode errorCode;
+#ifndef NO1730
 	instantDiCtrl = AdxInstantDiCtrlCreate();
 	instantDoCtrl = AdxInstantDoCtrlCreate();
 	DeviceInformation devInfo(_DevNum);
@@ -25,7 +26,7 @@ A1730::A1730(int _DevNum, AnsiString _file_name, TIniFile* _ini)
 	if (BioFailed(errorCode))
 		throw(Exception
 		("A1730::A1730: не смогли открыть плату Advantech1730"));
-
+#endif
 	if (!_ini->ValueExists("Default", "InversePCHA"))
 		_ini->WriteBool("Default", "InversePCHA", false);
 	if (!_ini->ValueExists("Default", "InversePCHRUN"))
@@ -90,8 +91,10 @@ __fastcall A1730::~A1730(void)
 {
 	TThread::Terminate();
 	TThread::WaitFor();
+#ifndef NO1730
 	instantDiCtrl->Dispose();
 	instantDoCtrl->Dispose();
+#endif
 	delete cs;
 }
 
@@ -107,6 +110,7 @@ void _fastcall A1730::Execute()
 			break;
 	}
 }
+#ifndef NO1730
 DWORD A1730::Read(void)
 {
 	BYTE buf[4];
@@ -138,6 +142,20 @@ void A1730::Write(DWORD _v)
 	if (errorcode != Success)
 		throw(Exception("A1730::Write: не могу записать на плату"));
 }
+#else
+DWORD A1730::Read(void)
+{
+	return 0;
+}
+DWORD A1730::ReadOut(void)
+{
+	return 0;
+}
+
+void A1730::Write(DWORD _v)
+{
+}
+#endif;
 
 void A1730::SetPeriod(int _period)
 {

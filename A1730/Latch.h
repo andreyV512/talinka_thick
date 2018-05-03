@@ -2,7 +2,7 @@
 
 #ifndef LatchH
 #define LatchH
-#include "Signal.h"
+#include "SignalX.h"
 
 // ---------------------------------------------------------------------------
 class Latch

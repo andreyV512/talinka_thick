@@ -8,7 +8,8 @@
 #include "Latch.h"
 #include<IniFiles.hpp>
 #pragma warn -8060
-#include "c:/Advantech/DAQNavi/Inc/bdaqctrl.h"
+//#include "c:/Advantech/DAQNavi/Inc/bdaqctrl.h"
+#include "Inc/bdaqctrl.h"
 #pragma warn .8060
 
 using namespace Automation::BDaq;
