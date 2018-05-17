@@ -73,7 +73,7 @@ A1730::A1730(int _DevNum, AnsiString _file_name, TIniFile* _ini)
 	iREADY = Find("Готовность");
 	iCONTROL = Find("Контроль");
 
-	oPCHPOW = Find("Питание ПЧ");
+	//oPCHPOW = Find("Питание ПЧ");
 	oSCANPOW = Find("Питание СУ");
 	oSOLPOW = Find("Питание соленоид");
 	oWORK = Find("Работа");

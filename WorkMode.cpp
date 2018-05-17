@@ -38,9 +38,10 @@ void __fastcall WorkThreadClass::Execute()
 	a1730->AlarmCycleOn(false);
 	a1730->SetAlarm(false);
 	NameThreadForDebugging("WorkThread");
-	a1730->oPCHPOW->Set(true);
+   //	a1730->oPCHPOW->Set(true);
 	adcboards->initSettings(&Globals_adcSettings);
 	pr("Инициализировали руднев шиляев");
+  	WorkMode();
 }
 
 void WorkThreadClass::WorkMode(void)
@@ -105,7 +106,7 @@ void WorkThreadClass::WorkMode(void)
 		pr(stext2);
 
 		if (!frConverter->setParameterSpeed(Globals_defaultRotParameter,
-			ini->ReadInteger("Type_" + Globals_typesize.name, "InSpeed", 20)))
+			ini->ReadInteger("Type_" + Globals_typesize.name, "InSpeed", 2)))
 		{
 			reason = "Не удалось выставить скорость вращения!";
 			break;
@@ -156,7 +157,7 @@ void WorkThreadClass::WorkMode(void)
 			break;
 		}
 		if (!frConverter->setParameterSpeed(Globals_defaultRotParameter,
-			ini->ReadInteger("Type_" + Globals_typesize.name, "WorkSpeed", 40)))
+			ini->ReadInteger("Type_" + Globals_typesize.name, "WorkSpeed", 4)))
 		{
 			reason = "Не удалось выставить рабочую скорость вращения!";
 			break;
@@ -190,20 +191,7 @@ void WorkThreadClass::WorkMode(void)
 		reason = "Ok";
 		break;
 	}
-	/*
-	 pr("1111111111111111111111111111111");
-	 a = "-40 getchVoltage()=";
-	 a += ThickSolenoid->getchVoltage();
-	 pr(a);
-	 rawStrobes->StopTick(GetTickCount());
-	 a = "-41 getchVoltage()=";
-	 a += ThickSolenoid->getchVoltage();
-	 pr(a);
-	 pr("1111111111111111111111111111111");
-	 a = "-42 getchVoltage()=";
-	 a += ThickSolenoid->getchVoltage();
-	 pr(a);
-	 */
+
 	frConverter->stopRotation();
 	rawStrobes->StopTick(GetTickCount());
 	for (; ;)
@@ -231,7 +219,7 @@ void WorkThreadClass::WorkMode(void)
 	a1730->AlarmCycleOn(false);
 	// сбросим управляющие сигналы
 	pr("Сняли все сигналы");
-	a1730->oSOLPOW->Set(false);
+//	a1730->oSOLPOW->Set(false);
 	a1730->oSHIFT->Set(false);
 	a1730->oRESULT->Set(false);
 	// a1730->oWORK->Set(false);
@@ -258,7 +246,7 @@ void WorkThreadClass::WorkMode(void)
 		a1730->oWORK->Set(false);
 		stext1 = "Режим \"Работа\" завершен с аварией!";
 		frConverter->stopRotation();
-		a1730->oPCHPOW->Set(false);
+ //		a1730->oPCHPOW->Set(false);
 		stext2 = reason;
 		result = false;
 	}

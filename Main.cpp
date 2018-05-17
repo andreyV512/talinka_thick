@@ -65,8 +65,8 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
 	TestZoneSize=ini->ReadInteger("Default","TestZoneSize",100);
 	testMode=NULL;
 	workthread=NULL;
-	a1730->oPCHPOW->Set(true);
-	a1730->oSOLPOW->Set(false);
+ //	a1730->oPCHPOW->Set(true);
+//	a1730->oSOLPOW->Set(false);
 	a1730->oSHIFT->Set(false);
 	a1730->oRESULT->Set(false);
 	a1730->oWORK->Set(false);
@@ -76,15 +76,15 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
    //	lcard=new LCard502();
 	SetControlsAble(true);
 	frConverter=new Inverter(ini);
-	Sleep(1000);
-	if(!frConverter->stateRead())
-	{
-		StatusBarBottom->Panels->Items[0]->Text="Не удалось прочитать состояние ПЧ";
-		StatusBarBottom->Refresh();
-		return;
-	}
-	StatusBarBottom->Panels->Items[0]->Text="ПЧ подключен";
-	StatusBarBottom->Refresh();
+	//Sleep(1000);
+	//if(!frConverter->stateRead())
+//	{
+	//	StatusBarBottom->Panels->Items[0]->Text="Не удалось прочитать состояние ПЧ";
+	//	StatusBarBottom->Refresh();
+	//	return;
+//	}
+//	StatusBarBottom->Panels->Items[0]->Text="ПЧ подключен";
+//	StatusBarBottom->Refresh();
 }
 
 // ---------------------------------------------------------------------------
@@ -192,7 +192,7 @@ void __fastcall TMainForm::FormDestroy(TObject *Sender)
 {
 	Sleep(1000);
 #ifndef NODEVICES
-	a1730->oPCHPOW->Set(false);
+   //	a1730->oPCHPOW->Set(false);
 	a1730->oSOLPOW->Set(false);
 	a1730->oSHIFT->Set(false);
 	a1730->oRESULT->Set(false);

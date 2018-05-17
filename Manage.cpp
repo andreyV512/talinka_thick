@@ -174,11 +174,13 @@ void __fastcall TManageForm::bRotationClick(TObject *Sender)
 {
 	if (bRotation->Caption == "Вращать")
 	{
+	/*
 		if(!a1730->oPCHPOW->Get())
 		{
 			a1730->oPCHPOW->Set(true);
 			Sleep(1000);
-        }
+		}
+		*/
 		if (!frConverter->setParameterSpeed(Globals_defaultRotParameter,
 			StrToInt(eFriquencyRot->Text)))
 		{

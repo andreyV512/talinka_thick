@@ -29,8 +29,8 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
-			<ILINK_LibraryPath>A1730\;L10M8PCI_SDK2\;..\Old\Thickness\;Bank\;MitCOME\;$(BDS)\ObjRepos\EN\Cpp\;slycomm\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-			<IncludePath>A1730\;L10M8PCI_SDK2\;Bank\;MitCOME\;$(BDS)\ObjRepos\EN\Cpp\;C:\Program Files\L-Card\lpcie\include;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>tools_debug\;A1730\;L10M8PCI_SDK2\;..\Old\Thickness\;Bank\;MitCOME\;$(BDS)\ObjRepos\EN\Cpp\;slycomm\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>tools_debug\;A1730\;L10M8PCI_SDK2\;Bank\;MitCOME\;$(BDS)\ObjRepos\EN\Cpp\;C:\Program Files\L-Card\lpcie\include;$(IncludePath)</IncludePath>
 			<LinkPackageStatics>rtl.lib;vcl.lib;Tee.lib;vclimg.lib;dbrtl.lib;adortl.lib;vclactnband.lib;vclx.lib;vcldb.lib;bcbsmp.lib;inet.lib;dsnap.lib;dsnapcon.lib</LinkPackageStatics>
 			<OutputExt>exe</OutputExt>
 			<PackageImports>rtl.bpi;vcl.bpi;bcbie.bpi;xmlrtl.bpi;vclactnband.bpi;vclx.bpi;bcbsmp.bpi;VclSmp.bpi;vclimg.bpi;svnui.bpi;svn.bpi;bdertl.bpi;TeeUI.bpi;TeeDB.bpi;Tee.bpi;vcldb.bpi;dbrtl.bpi;vcldbx.bpi;vcltouch.bpi;dsnap.bpi;dsnapcon.bpi;vclib.bpi;ibxpress.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;inet.bpi;intrawebdb_110_150.bpi;Intraweb_110_150.bpi;vclie.bpi;websnap.bpi;webdsnap.bpi;inetdb.bpi;inetdbbde.bpi;inetdbxpress.bpi;soaprtl.bpi;vclribbon.bpi;dbexpress.bpi;DbxCommonDriver.bpi;DataSnapIndy10ServerTransport.bpi;DataSnapProviderClient.bpi;DbxClientDriver.bpi;DataSnapClient.bpi;dbxcds.bpi;DataSnapServer.bpi;AzureCloud.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;DBXFirebirdDriver.bpi;DBXSybaseASEDriver.bpi;DBXSybaseASADriver.bpi;DBXOracleDriver.bpi;DBXMSSQLDriver.bpi;DBXInformixDriver.bpi;DBXDb2Driver.bpi;CodeSiteExpressVcl.bpi</PackageImports>
@@ -279,6 +279,12 @@
 			<ResFiles Include="Thickness.res">
 				<BuildOrder>1</BuildOrder>
 			</ResFiles>
+			<CppCompile Include="tools_debug\DebugMess.cpp">
+				<BuildOrder>52</BuildOrder>
+			</CppCompile>
+			<None Include="tools_debug\DebugMess.h">
+				<BuildOrder>53</BuildOrder>
+			</None>
 			<CppCompile Include="tubefile.cpp">
 				<DependentOn>tubefile.h</DependentOn>
 				<BuildOrder>32</BuildOrder>
@@ -323,11 +329,11 @@
 			<FormResources Include="Protocol.dfm"/>
 			<FormResources Include="SettingsADC.dfm"/>
 			<FormResources Include="Settings.dfm"/>
+			<FormResources Include="Manage.dfm"/>
 			<FormResources Include="UTFSpectro.dfm"/>
 			<FormResources Include="uFRSetADC.dfm"/>
 			<FormResources Include="ViewTubeDetails.dfm"/>
 			<FormResources Include="View.dfm"/>
-			<FormResources Include="Manage.dfm"/>
 			<FormResources Include="A1730\uFRSigPanel.dfm"/>
 			<FormResources Include="A1730\SignalsState.dfm"/>
 			<FormResources Include="Main.dfm"/>

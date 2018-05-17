@@ -32,8 +32,8 @@ void __fastcall TestMode::Execute()
 #endif
 	if(!adcBoards->initSettings(&Globals_adcSettings))
 		throw(Exception("TestMode::Execute: Не удалось инициализировать платуь плату rudshel"));
-	pr("Врубаем соленоиды");
-	a1730->oSOLPOW->Set(true);
+//	pr("Врубаем соленоиды");
+//	a1730->oSOLPOW->Set(true);
 
 	DataAcquirer* da0=new DataAcquirer(adcBoards->board0,rawStrobes);
 	Sleep(500);
@@ -61,7 +61,7 @@ void __fastcall TestMode::Execute()
 	delete da0;
 	delete da1;
 	a1730->oSCANPOW->Set(false);
-	a1730->oSOLPOW->Set(false);
+//	a1730->oSOLPOW->Set(false);
 	pr("Вышли из теста");
 //	ToFile();
 }

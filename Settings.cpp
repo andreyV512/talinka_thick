@@ -244,12 +244,12 @@ void __fastcall TSettingsForm::cbTypeSizeSelect(TObject *Sender)
 			ini->ReadFloat(sect, "MinThickness", 2), true);
 		ValueListEditor->InsertRow("Максимальная толщина, мм",
 			ini->ReadFloat(sect, "MaxThickness", 9), true);
-		ValueListEditor->InsertRow("Скорость вращения на входе, Гц.",
-			ini->ReadInteger(sect, "InSpeed", 20), true);
-		ValueListEditor->InsertRow("Скорость вращения в работе, Гц.",
-			ini->ReadInteger(sect, "WorkSpeed", 35), true);
-		ValueListEditor->InsertRow("Скорость вращения на выходе, Гц.",
-			ini->ReadInteger(sect, "OutSpeed", 20), true);
+		ValueListEditor->InsertRow("Скорость вращения на входе",
+			ini->ReadInteger(sect, "InSpeed", 2), true);
+		ValueListEditor->InsertRow("Скорость вращения в работе",
+			ini->ReadInteger(sect, "WorkSpeed", 4), true);
+		ValueListEditor->InsertRow("Скорость вращения на выходе",
+			ini->ReadInteger(sect, "OutSpeed", 5), true);
 		StatusBarBottom->Panels->Items[0]->Text = "";
 	}
 	catch (...)
