@@ -22,13 +22,13 @@ void __fastcall TestMode::Execute()
 	pr("Зашли в тест");
 	rawStrobes->Clear();
 #ifndef NO_A1730
-	if(!a1730->iCC->Get())
-	{
-		Application->MessageBoxW(L"Включите цепи управления!",L"Внимание",
-			MB_ICONWARNING);
-		rawStrobes->SetTestComplete();
-		return;
-	}
+	//if(!a1730->iCC->Get())
+	//{
+	//	Application->MessageBoxW(L"Включите цепи управления!",L"Внимание",
+	//		MB_ICONWARNING);
+	//	rawStrobes->SetTestComplete();
+	//	return;
+	//}
 #endif
 	if(!adcBoards->initSettings(&Globals_adcSettings))
 		throw(Exception("TestMode::Execute: Не удалось инициализировать платуь плату rudshel"));

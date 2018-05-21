@@ -1,10 +1,8 @@
 __history/
 *.obj
-Debug/*.exe
 doc/
 help/
 Protocols/*.txt
-Debug/Win32/*.exe
 *.ils
 *.ild
 *.ilf
@@ -13,4 +11,6 @@ Debug/Win32/*.exe
 *.fds
 *.tds
 *.dkb
-deb/Win32/
+deb/
+Debug/
+

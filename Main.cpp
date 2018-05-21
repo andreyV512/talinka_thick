@@ -12,6 +12,7 @@
 //#include "LCARD502.h"
 #include "Protocol.h"
 #include "A1730.h"
+#include "DebugMess.h"
 
 // ---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -295,7 +296,7 @@ void __fastcall TMainForm::cbTypeSizeSelect(TObject *Sender)
 void __fastcall TMainForm::bTestClick(TObject *Sender)
 {
 	int TestTime=ini->ReadInteger("Default","TestTime_s",10);
-	// int TestZoneSize = ini->ReadInteger("Default", "TestZoneSize", 100);
+	//int TestZoneSize = ini->ReadInteger("Default", "TestZoneSize", 100);
 
 	thickness.clear();
 	pr("Блокируем форму");

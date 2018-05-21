@@ -5,6 +5,7 @@
 #include <SysUtils.hpp>
 #include "Protocol.h"
 #include <IOUtils.hpp>
+#include "DebugMess.h"
 // ---------------------------------------------------------------------------
 #pragma package(smart_init)
 
@@ -317,9 +318,9 @@ Zone* RawStrobes::GetNewZoneTest(unsigned int _size)
 	RawStrobe* ret;
 	cs->Enter();
 	{
-		if (p_calced < (p_zoned + _size))
-			ret = NULL;
-		else
+		//if (p_calced < (p_zoned + _size))
+		  //	ret = NULL;
+		//else
 		{
 			ret = p_zoned;
 			p_zoned += _size;
@@ -328,6 +329,7 @@ Zone* RawStrobes::GetNewZoneTest(unsigned int _size)
 				("RawStrobes::GetNewZoneTest: выход за пределы"));
 		}
 	} cs->Leave();
+	dprint("p_zoned %x\n", p_zoned);
 	if (ret == NULL)
 		return (NULL);
 	else

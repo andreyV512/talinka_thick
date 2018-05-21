@@ -6,6 +6,7 @@
 #include "View.h"
 #include "Global.h"
 #include "uFunctions.h"
+#include "DebugMess.h"
 // ---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -156,6 +157,7 @@ void __fastcall TViewForm::ChartClickSeries(TCustomChart *Sender,
 void __fastcall TViewForm::FormKeyDown(TObject *Sender,WORD &Key,
 	TShiftState Shift)
 {
+	dprint("key down %d(73)\n", Key);
 	if(Key==27)
 		ViewForm->Close();
 	else if(Key==73)

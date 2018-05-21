@@ -131,7 +131,7 @@ bool Inverter::startRotation()
 	testThread=new rotationThread(inverter,cs);
 	return true;
 	*/
-  bool b = a1730->oRL->Get() || a1730->oRM->Get() ||  (a1730->oRH->Get();
+  bool b = a1730->oRL->Get() || a1730->oRM->Get() ||  (a1730->oRH->Get());
 	a1730->oSTF->Set(b);
   if(!b) TPr::pr("ошибка: не задана скорость ПЧ перед стартом!");
 	return b;

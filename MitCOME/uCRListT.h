@@ -3,6 +3,7 @@
 #define uCRListTH
 // ---------------------------------------------------------------------------
 #include <classes.hpp>
+#include "DebugMess.h"
 
 // ---------------------------------------------------------------------------
 template<class T>
@@ -56,7 +57,9 @@ template<class T>
 T* CRListT<T>:: operator[](int _i)
 {
 	if (_i > L->Count)
+	{
 		return (NULL);
+	}
 	return ((T*)L->Items[_i]);
 }
 

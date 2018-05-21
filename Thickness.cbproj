@@ -4,7 +4,7 @@
 			<ProjectVersion>12.2</ProjectVersion>
 			<MainSource>MyProject.cpp</MainSource>
 			<Base>True</Base>
-			<Config Condition="'$(Config)'==''">deb</Config>
+			<Config Condition="'$(Config)'==''">Debug</Config>
 			<Platform>Win32</Platform>
 			<AppType>Application</AppType>
 			<FrameworkType>VCL</FrameworkType>
@@ -30,7 +30,7 @@
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
 			<ILINK_LibraryPath>tools_debug\;A1730\;L10M8PCI_SDK2\;..\Old\Thickness\;Bank\;MitCOME\;$(BDS)\ObjRepos\EN\Cpp\;slycomm\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-			<IncludePath>tools_debug\;A1730\;L10M8PCI_SDK2\;Bank\;MitCOME\;$(BDS)\ObjRepos\EN\Cpp\;C:\Program Files\L-Card\lpcie\include;$(IncludePath)</IncludePath>
+			<IncludePath>tools_debug\;A1730\;L10M8PCI_SDK2\;Bank\;MitCOME\;$(BDS)\ObjRepos\EN\Cpp\;$(IncludePath)</IncludePath>
 			<LinkPackageStatics>rtl.lib;vcl.lib;Tee.lib;vclimg.lib;dbrtl.lib;adortl.lib;vclactnband.lib;vclx.lib;vcldb.lib;bcbsmp.lib;inet.lib;dsnap.lib;dsnapcon.lib</LinkPackageStatics>
 			<OutputExt>exe</OutputExt>
 			<PackageImports>rtl.bpi;vcl.bpi;bcbie.bpi;xmlrtl.bpi;vclactnband.bpi;vclx.bpi;bcbsmp.bpi;VclSmp.bpi;vclimg.bpi;svnui.bpi;svn.bpi;bdertl.bpi;TeeUI.bpi;TeeDB.bpi;Tee.bpi;vcldb.bpi;dbrtl.bpi;vcldbx.bpi;vcltouch.bpi;dsnap.bpi;dsnapcon.bpi;vclib.bpi;ibxpress.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;inet.bpi;intrawebdb_110_150.bpi;Intraweb_110_150.bpi;vclie.bpi;websnap.bpi;webdsnap.bpi;inetdb.bpi;inetdbbde.bpi;inetdbxpress.bpi;soaprtl.bpi;vclribbon.bpi;dbexpress.bpi;DbxCommonDriver.bpi;DataSnapIndy10ServerTransport.bpi;DataSnapProviderClient.bpi;DbxClientDriver.bpi;DataSnapClient.bpi;dbxcds.bpi;DataSnapServer.bpi;AzureCloud.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;DBXFirebirdDriver.bpi;DBXSybaseASEDriver.bpi;DBXSybaseASADriver.bpi;DBXOracleDriver.bpi;DBXMSSQLDriver.bpi;DBXInformixDriver.bpi;DBXDb2Driver.bpi;CodeSiteExpressVcl.bpi</PackageImports>
@@ -49,10 +49,10 @@
 			<ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<BRCC_IncludePath>L10M8PCI_SDK2\include;tools_debug\;A1730\;L10M8PCI_SDK2\;Bank\;MitCOME\;$(BDS)\ObjRepos\EN\Cpp\;L10M8PCI_SDK2\include;tools_debug\;A1730\;L10M8PCI_SDK2\;Bank\;MitCOME\;$(BDS)\ObjRepos\EN\Cpp\;C:\Program Files\L-Card\lpcie\include;$(BRCC_IncludePath)</BRCC_IncludePath>
 			<IncludePath>L10M8PCI_SDK2\include;$(IncludePath)</IncludePath>
 			<Defines>UNICODE;$(Defines)</Defines>
-			<ILINK_LibraryPath>C:\Program Files\L-Card\lpcie\lib\borland;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-			<BCC_IncludePath>C:\Program Files\L-Card\lpcie\include;$(BCC_IncludePath)</BCC_IncludePath>
+			<BCC_IncludePath>L10M8PCI_SDK2\include;tools_debug\;A1730\;L10M8PCI_SDK2\;Bank\;MitCOME\;$(BDS)\ObjRepos\EN\Cpp\;$(BCC_IncludePath)</BCC_IncludePath>
 			<BCC_wiip>false</BCC_wiip>
 			<BCC_wmls>false</BCC_wmls>
 			<BCC_PCHCache>true</BCC_PCHCache>
@@ -329,13 +329,13 @@
 			<FormResources Include="Protocol.dfm"/>
 			<FormResources Include="SettingsADC.dfm"/>
 			<FormResources Include="Settings.dfm"/>
-			<FormResources Include="Manage.dfm"/>
 			<FormResources Include="UTFSpectro.dfm"/>
 			<FormResources Include="uFRSetADC.dfm"/>
 			<FormResources Include="ViewTubeDetails.dfm"/>
 			<FormResources Include="View.dfm"/>
 			<FormResources Include="A1730\uFRSigPanel.dfm"/>
 			<FormResources Include="A1730\SignalsState.dfm"/>
+			<FormResources Include="Manage.dfm"/>
 			<FormResources Include="Main.dfm"/>
 			<FormResources Include="ColorSettings.dfm"/>
 			<BuildConfiguration Include="Release">
