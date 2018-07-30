@@ -24,16 +24,23 @@ void __fastcall DataAcquirer::Execute()
 	for (; ;)
 	{
 		if (card->Read(data))
+		{
 			rawStrobes->Add(data,GetTickCount());
+			dprint("lan ok\n");
+		}
 		else
 		{
 			pr("DataAcquirer::Execute: Ошибка приема данных");
 			a1730->Latchterminate("Ошибка приема данных");
 			a1730->SetLatchError();
+			dprint("lan err\n");
 			break;
 		}
 		if (Terminated)
+		{
+		dprint("lan terminated\n");
 			break;
+		}
 	}
 	delete data;
 	pr("DataAcquirer::Execute: Закончили");

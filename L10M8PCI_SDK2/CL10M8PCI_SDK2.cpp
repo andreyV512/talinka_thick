@@ -1,6 +1,7 @@
 #pragma hdrstop
 #include "CL10M8PCI_SDK2.h"
 #define BOARD_NAME "LAn10M8PCI"
+#include "DebugMess.h"
 
 // ---------------------------------------------------------------------------
 CL10M8PCI_SDK2* CL10M8PCI_SDK2::Create(int _baseAddress,OnPrDef _OnPr)
@@ -247,8 +248,13 @@ bool CL10M8PCI_SDK2::Read(char* _buf)
 	{
 		device->Stop();
 		pr(GetErr(st));
+		dprint("Lan read Err %x\n");
 		return (false);
 	}
+	else
+	{
+		dprint("Lan read Ok %x\n");
+    }
 	device->Stop();
 
 	char* ptr_save=data.ptr;
