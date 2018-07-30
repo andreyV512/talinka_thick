@@ -68,14 +68,14 @@ A1730::A1730(int _DevNum, AnsiString _file_name, TIniFile* _ini)
 	iPCHA = Find("ПЧ А");
 	iCC = Find("Цепи управления");
 	iPCHRUN = Find("ПЧ RUN");
-	iSTROBE = Find("Строб Зоны");
-	iCYCLE = Find("Цикл");
+	iSTROBE = Find("Строб3");
+	iCYCLE = Find("Цикл3");
 	iREADY = Find("Готовность");
 	iCONTROL = Find("Контроль");
 
 	//oPCHPOW = Find("Питание ПЧ");
 	oSCANPOW = Find("Питание СУ");
-	oSOLPOW = Find("Питание соленоид");
+   //	oSOLPOW = Find("Питание соленоид");
 	oWORK = Find("Работа");
 	oMEAS = Find("Измерение");
 	oSHIFT = Find("Перекладка");
