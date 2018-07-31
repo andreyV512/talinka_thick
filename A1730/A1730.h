@@ -69,7 +69,7 @@ public:
 
 	CSignal* oPCHPOW; // Питание ПЧ
 	CSignal* oSCANPOW; // Питание СУ
-	CSignal* oSOLPOW; // Питание соленоид
+   //	CSignal* oSOLPOW; // Питание соленоид
 	CSignal* oWORK; // Работа
 	CSignal* oMEAS; // Измерение
 	CSignal* oSHIFT; // Перекладка

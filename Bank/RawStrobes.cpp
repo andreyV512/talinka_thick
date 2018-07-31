@@ -329,7 +329,7 @@ Zone* RawStrobes::GetNewZoneTest(unsigned int _size)
 				("RawStrobes::GetNewZoneTest: выход за пределы"));
 		}
 	} cs->Leave();
-	dprint("p_zoned %x\n", p_zoned);
+ //	dprint("p_zoned %x\n", p_zoned);
 	if (ret == NULL)
 		return (NULL);
 	else

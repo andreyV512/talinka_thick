@@ -194,7 +194,7 @@ void __fastcall TMainForm::FormDestroy(TObject *Sender)
 	Sleep(1000);
 #ifndef NODEVICES
    //	a1730->oPCHPOW->Set(false);
-	a1730->oSOLPOW->Set(false);
+   //	a1730->oSOLPOW->Set(false);
 	a1730->oSHIFT->Set(false);
 	a1730->oRESULT->Set(false);
 	a1730->oWORK->Set(false);
@@ -605,6 +605,7 @@ void __fastcall TMainForm::TimerZoneTimer(TObject *Sender)
 	TTimer* t=(TTimer*)Sender;
 	t->Enabled=false;
 	Zone* zone;
+   //	dprint("tick\n");
 	if(test_timer)
 		zone=rawStrobes->GetNewZoneTest(TestZoneSize);
 	else

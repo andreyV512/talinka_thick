@@ -14,4 +14,4 @@ Protocols/*.txt
 deb/
 Debug/
 
-Debug/Win32/Thickness.*
+/Debug/Win32/Thickness.*
