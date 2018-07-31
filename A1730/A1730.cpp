@@ -72,6 +72,7 @@ A1730::A1730(int _DevNum, AnsiString _file_name, TIniFile* _ini)
 	iCYCLE = Find("Цикл");
 	iREADY = Find("Готовность");
 	iCONTROL = Find("Контроль");
+	iCONTROL_END = Find("Контроль4");
 
 	//oPCHPOW = Find("Питание ПЧ");
 	oSCANPOW = Find("Питание СУ");
@@ -91,6 +92,17 @@ A1730::A1730(int _DevNum, AnsiString _file_name, TIniFile* _ini)
 	OnFront = NULL;
 	IsAlarm = false;
 	latchError=false;
+
+	baseWidth = _ini->ReadInteger("base", "baseWidth", 700);
+
+	speedTube = 0.4;
+	controlBegin =  controlEnd = currentControl = 0;
+}
+
+void A1730::Clear()
+{
+    speedTube = 0.4;
+	controlBegin =  controlEnd = currentControl = 0;
 }
 
 __fastcall A1730::~A1730(void)
@@ -204,6 +216,25 @@ void A1730::ReadSignals(void)
 				p->last_changed = tick;
 			}
 		}
+		if(!controlBegin && iCONTROL->value) currentControl = controlBegin = tick;
+		if(!controlEnd && iCONTROL_END->value)
+		{
+			controlEnd = tick;
+			speedTube = (double)baseWidth/(controlEnd - controlBegin);
+			dprint("SpeedTube %f\n", speedTube);
+		}
+		double t = speedTube * (int)(currentControl - tick);
+		if(t > 200)
+		{
+			currentControl += double(t - 200) / speedTube  ;
+			iSTROBE->value = true;
+			iSTROBE->value_prev = false;
+		}  else if(t > 100)
+		{
+			iSTROBE->value = false;
+			iSTROBE->value_prev = true;
+		}
+
 		Alarm();
 		SendFront(tick);
 		Latch* lp;

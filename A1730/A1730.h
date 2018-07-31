@@ -65,6 +65,7 @@ public:
 	CSignal* iCYCLE; // Цикл
 	CSignal* iREADY; // Готовность
 	CSignal* iCONTROL; // Контроль
+	CSignal* iCONTROL_END; // Контроль
 
 	CSignal* oPCHPOW; // Питание ПЧ
 	CSignal* oSCANPOW; // Питание СУ
@@ -80,6 +81,10 @@ public:
 	CSignal *oRM;        //  код скорости 1
 	CSignal *oRH;        //  код скорости 2
 
+	double speedTube;
+	unsigned controlBegin, controlEnd, currentControl;
+	int baseWidth;
+
 	inline int SignalCount(void)
 	{
 		return (M.Count());
@@ -93,6 +98,7 @@ public:
 	void SetOnFront(OnFrontDef _OnFront);
 	void Latchterminate(AnsiString _msg);
 	void SetAlarm(bool _IsAlarm);
+	void Clear();
 };
 extern A1730* a1730;
 #endif

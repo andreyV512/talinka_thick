@@ -65,6 +65,7 @@ void WorkThreadClass::WorkMode(void)
 	// DataAcquirer* da0 = NULL;
 	// DataAcquirer* da1 = NULL;
 	AnsiString reason;
+	a1730->Clear();
 	while (true)
 	{
 		// reason = "Тест Авария";
