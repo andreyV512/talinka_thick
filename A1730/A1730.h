@@ -65,7 +65,7 @@ public:
 	CSignal* iCYCLE; // Цикл
 	CSignal* iREADY; // Готовность
 	CSignal* iCONTROL; // Контроль
-	CSignal* iCONTROL_END; // Контроль
+	CSignal* iSQ1; // база
 
 	CSignal* oPCHPOW; // Питание ПЧ
 	CSignal* oSCANPOW; // Питание СУ
