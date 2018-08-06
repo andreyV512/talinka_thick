@@ -20,8 +20,9 @@ __published:	// IDE-managed Components
 	TGroupBox *gbThickness;
 	TStatusBar *StatusBarBottom;
 	TBitBtn *bRotation;
-	TEdit *eFriquencyRot;
-	TLabel *Label4;
+	TCheckBox *cbRL;
+	TCheckBox *cbRM;
+	TCheckBox *cbRH;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormKeyPress(TObject *Sender, wchar_t &Key);
 	void __fastcall FormDestroy(TObject *Sender);

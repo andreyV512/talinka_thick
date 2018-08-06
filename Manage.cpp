@@ -65,8 +65,10 @@ void __fastcall TManageForm::FormShow(TObject *Sender)
 	on = (TColor)ini->ReadInteger("Color", "ActiveIn", 0);
 	off = (TColor)ini->ReadInteger("Color", "NotActiveIn", 0);
 	move = (TColor)ini->ReadInteger("Color", "NotActiveOut", 0);
-	eFriquencyRot->Text =
-		IntToStr(frConverter->getParameterSpeed(Globals_defaultRotParameter));
+	int speed = frConverter->getParameterSpeed(Globals_defaultRotParameter);
+	cbRL->Checked = 0 != (speed & 1);
+	cbRM->Checked = 0 != (speed & 2);
+	cbRH->Checked = 0 != (speed & 4);
 	// включаем таймер, отслеживающий состояние входов и выходов
 	butt_enabled = true;
 	StatusBarBottom->Panels->Items[0]->Text = "";
@@ -181,8 +183,11 @@ void __fastcall TManageForm::bRotationClick(TObject *Sender)
 			Sleep(1000);
 		}
 		*/
-		if (!frConverter->setParameterSpeed(Globals_defaultRotParameter,
-			StrToInt(eFriquencyRot->Text)))
+		int speed = 0;
+		if(cbRL->Checked) speed |= 1;
+		if(cbRM->Checked) speed |= 2;
+		if(cbRH->Checked) speed |= 4;
+		if (!frConverter->setParameterSpeed(Globals_defaultRotParameter, speed))
 		{
 			TPr::pr("frConverter->setParameterSpeed false");
 			StatusBarBottom->Panels->Items[0]->Text =
@@ -261,3 +266,4 @@ void __fastcall TManageForm::FormCreate(TObject * Sender)
 	LoadFormPos(this, ini);
 }
 // ---------------------------------------------------------------------------
+

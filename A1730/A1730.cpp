@@ -72,7 +72,7 @@ A1730::A1730(int _DevNum, AnsiString _file_name, TIniFile* _ini)
 	iCYCLE = Find("Цикл3");
 	iREADY = Find("Готовность");
 	iCONTROL = Find("Контроль");
-	iSQ1 = Find("iSQ1");
+	iSQ1 = Find("SQ21");
 
 	//oPCHPOW = Find("Питание ПЧ");
 	oSCANPOW = Find("Питание СУ");

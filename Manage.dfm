@@ -27,16 +27,9 @@ object ManageForm: TManageForm
     Height = 115
     Caption = #1052#1086#1076#1091#1083#1100' '#1090#1086#1083#1097#1080#1085#1099' '#1089#1090#1077#1085#1082#1080
     TabOrder = 0
-    object Label4: TLabel
-      Left = 160
-      Top = 40
-      Width = 72
-      Height = 13
-      Caption = #1057#1082#1086#1088#1086#1089#1090#1100' '#1074' '#1043#1094
-    end
     object bRotation: TBitBtn
-      Left = 35
-      Top = 38
+      Left = 3
+      Top = 46
       Width = 113
       Height = 49
       Caption = #1042#1088#1072#1097#1072#1090#1100
@@ -52,13 +45,29 @@ object ManageForm: TManageForm
       OnClick = bRotationClick
       OnKeyPress = FormKeyPress
     end
-    object eFriquencyRot: TEdit
-      Left = 160
-      Top = 66
-      Width = 107
-      Height = 21
-      NumbersOnly = True
+    object cbRL: TCheckBox
+      Left = 152
+      Top = 24
+      Width = 97
+      Height = 17
+      Caption = 'RL'
       TabOrder = 1
+    end
+    object cbRM: TCheckBox
+      Left = 152
+      Top = 47
+      Width = 97
+      Height = 17
+      Caption = 'RM'
+      TabOrder = 2
+    end
+    object cbRH: TCheckBox
+      Left = 152
+      Top = 72
+      Width = 97
+      Height = 17
+      Caption = 'RH'
+      TabOrder = 3
     end
   end
   object StatusBarBottom: TStatusBar
@@ -81,7 +90,5 @@ object ManageForm: TManageForm
       end>
     ParentColor = True
     UseSystemFont = False
-    ExplicitTop = 254
-    ExplicitWidth = 584
   end
 end
