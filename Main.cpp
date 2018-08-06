@@ -694,6 +694,7 @@ DWORD WINAPI TestInputBitCycle3(PVOID p)
 			((TMainForm *)p)->ExitTube->Caption = "Выгон трубы";
 			frConverter->stopRotation();
 			((TMainForm *)p)->ExitTube->Tag = 0;
+			dprint("TestInputBitCycle3\n");
 			return 0;
 		}
 	}
@@ -713,14 +714,16 @@ if(0 == ExitTube->Tag)
 			a1730->oWORK->Set(true);
 			Sleep(1000);
 			CloseHandle(CreateThread(NULL, 0, TestInputBitCycle3, this, 0, NULL));
+			dprint("ExitTubeClick\n");
 		} else
 		{
 			pr("Не удалось выставить рабочую скорость вращения!");
+			dprint("ExitTubeClick err\n");
 		}
-		}
-else
+}else
 {
 	SetEvent(hEvent);
+	dprint("Event\n");
 }
 }
 //---------------------------------------------------------------------------
