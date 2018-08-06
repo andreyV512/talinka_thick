@@ -84,6 +84,7 @@ __published:	// IDE-managed Components
 	TMemo *Memo1;
 	TBarSeries *Series3;
 	TTimer *TimerZone;
+	TButton *ExitTube;
 	void __fastcall MainFormInit(TObject *Sender);			// выравнивает объекты на форме, работает в начале работы и при Resize
 // стандартные функции
 	void __fastcall FormCreate(TObject *Sender);
@@ -113,11 +114,15 @@ __published:	// IDE-managed Components
 	void __fastcall bClass2TubeClick(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall TimerZoneTimer(TObject *Sender);
+	void __fastcall ExitTubeClick(TObject *Sender);
 
 private:	// User declarations
 	RawStrobes* rawStrobes;
 	Calcers* calcers;
 	int calcers_count;
+public:
+	HANDLE hEvent;
+private:
 	void pr(AnsiString _msg);
 	std::vector<double>thickness;
 

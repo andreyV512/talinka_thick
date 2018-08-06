@@ -32,6 +32,7 @@ __fastcall TMainForm::TMainForm(TComponent* Owner) : TForm(Owner)
 // ---------------------------------------------------------------------------
 void __fastcall TMainForm::FormCreate(TObject *Sender)
 {
+	hEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
 	TThread::CurrentThread->NameThreadForDebugging("Main ");
 
 	ini=new TIniFile("..\\..\\Settings\\SettingsThickness.ini");
@@ -223,6 +224,7 @@ void __fastcall TMainForm::FormDestroy(TObject *Sender)
 	TPr::Dispose();
 	SaveFormPos(this,ini);
 	delete ini;
+	CloseHandle(hEvent);
   //	delete lcard;
 }
 
@@ -680,3 +682,47 @@ void TMainForm::pr(AnsiString _msg)
 {
 	TPr::pr(_msg);
 }
+
+DWORD WINAPI TestInputBitCycle3(PVOID p)
+{
+	while(true)
+	{
+		DWORD res = WaitForSingleObject(((TMainForm *)p)->hEvent, 500);
+		if((WAIT_TIMEOUT == res && a1730->iCYCLE->Get()) || WAIT_OBJECT_0 == res)
+		{
+			a1730->oWORK->Set(false);
+			((TMainForm *)p)->ExitTube->Caption = "Выгон трубы";
+			frConverter->stopRotation();
+			((TMainForm *)p)->ExitTube->Tag = 0;
+			return 0;
+		}
+	}
+}
+
+void __fastcall TMainForm::ExitTubeClick(TObject *Sender)
+{
+if(0 == ExitTube->Tag)
+{
+		int speed = ini->ReadInteger("Type_" + Globals_typesize.name, "WorkSpeed", 4);
+		if (frConverter->setParameterSpeed(Globals_defaultRotParameter, speed))
+		{
+			ExitTube->Caption = "СТОП вращения";
+			ExitTube->Tag = 1;
+			frConverter->startRotation();
+			Sleep(1000);
+			a1730->oWORK->Set(true);
+			Sleep(1000);
+			CloseHandle(CreateThread(NULL, 0, TestInputBitCycle3, this, 0, NULL));
+		} else
+		{
+			pr("Не удалось выставить рабочую скорость вращения!");
+		}
+		}
+else
+{
+	SetEvent(hEvent);
+}
+}
+//---------------------------------------------------------------------------
+
+

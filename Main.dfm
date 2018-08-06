@@ -470,6 +470,21 @@ object MainForm: TMainForm
       Visible = False
     end
   end
+  object ExitTube: TButton
+    Left = 698
+    Top = 81
+    Width = 120
+    Height = 41
+    Caption = #1042#1099#1075#1086#1085' '#1090#1088#1091#1073#1099
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clBlue
+    Font.Height = 20
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 11
+    OnClick = ExitTubeClick
+  end
   object MainMenu1: TMainMenu
     Left = 984
     Top = 40
