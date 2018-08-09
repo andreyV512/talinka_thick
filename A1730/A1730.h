@@ -82,7 +82,7 @@ public:
 	CSignal *oRH;        //  код скорости 2
 
 	double speedTube;
-	unsigned controlBegin, controlEnd, currentControl;
+	unsigned beginControl, endControl, delayControl, currentControl;
 	int baseWidth;
 
 	inline int SignalCount(void)

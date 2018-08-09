@@ -95,14 +95,14 @@ A1730::A1730(int _DevNum, AnsiString _file_name, TIniFile* _ini)
 
 	baseWidth = _ini->ReadInteger("base", "baseWidth", 3150);
 
-	speedTube = 0.4;
-	controlBegin =  controlEnd = currentControl = 0;
+	speedTube = 0.36;
+	beginControl = currentControl = delayControl =  endControl = 0;
 }
 
 void A1730::Clear()
 {
-    speedTube = 0.4;
-	controlBegin =  controlEnd = currentControl = 0;
+	speedTube = 0.36;
+	beginControl = currentControl = delayControl = endControl = 0;
 }
 
 __fastcall A1730::~A1730(void)
@@ -216,17 +216,23 @@ void A1730::ReadSignals(void)
 				p->last_changed = tick;
 			}
 		}
-		if(!controlBegin && iSQ1->value) currentControl = controlBegin = tick;
-		if(!controlEnd && iCONTROL->value)
+
+///////////////////////////////////////////////////////////////////
+
+		if(!beginControl && iSQ1->value) beginControl = tick;
+		if(!endControl && iCONTROL->value)
 		{
-			controlEnd = tick;
-			speedTube = (double)baseWidth/(controlEnd - controlBegin);
+			endControl = tick;
+			speedTube = (double)baseWidth/(endControl - beginControl);
 			dprint("SpeedTube %f\n", speedTube);
 		}
-		double t = speedTube * (int)(currentControl - tick);
+
+		if(currentControl > 0)
+		{
+		double t = speedTube * (int)(tick - currentControl);
 		if(t > 200)
 		{
-			currentControl += int(double(t - 200) / speedTube);
+			currentControl += int((400.0 - t) / speedTube);
 			iSTROBE->value = true;
 			iSTROBE->value_prev = false;
 		}  else if(t > 100)
@@ -234,6 +240,17 @@ void A1730::ReadSignals(void)
 			iSTROBE->value = false;
 			iSTROBE->value_prev = true;
 		}
+		}
+		else
+		{
+			double t = speedTube * (int)(tick - beginControl);
+			if(t > 400)
+			{
+                currentControl = tick;
+            }
+        }
+
+/////////////////////////////////////////////////////////////////////
 
 		Alarm();
 		SendFront(tick);
