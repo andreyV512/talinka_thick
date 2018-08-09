@@ -688,15 +688,41 @@ DWORD WINAPI TestInputBitCycle3(PVOID p)
 	while(true)
 	{
 		DWORD res = WaitForSingleObject(((TMainForm *)p)->hEvent, 500);
-		if((WAIT_TIMEOUT == res && a1730->iCYCLE->Get()) || WAIT_OBJECT_0 == res)
+		/*
+		switch(res)
 		{
-			a1730->oWORK->Set(false);
-			((TMainForm *)p)->ExitTube->Caption = "Выгон трубы";
-			frConverter->stopRotation();
-			((TMainForm *)p)->ExitTube->Tag = 0;
-			dprint("TestInputBitCycle3\n");
-			return 0;
+			case WAIT_TIMEOUT:
+			{
+			   if(!a1730->iCONTROL->Get())
+			   {
+				a1730->oWORK->Set(false);
+				((TMainForm *)p)->ExitTube->Caption = "Выгон трубы";
+				frConverter->stopRotation();
+				((TMainForm *)p)->ExitTube->Tag = 0;
+				((TMainForm *)p)->SetControlsAble(true);
+				return 0;
+               }
+			}
+			break;
+			case WAIT_OBJECT_0:
+				a1730->oWORK->Set(false);
+				((TMainForm *)p)->ExitTube->Caption = "Выгон трубы";
+				frConverter->stopRotation();
+				((TMainForm *)p)->ExitTube->Tag = 0;
+				((TMainForm *)p)->SetControlsAble(true);
+				return 0;
+
 		}
+		*/
+		if(WAIT_TIMEOUT == res && !a1730->iCONTROL->Get() || WAIT_OBJECT_0 == res)
+		{
+           		a1730->oWORK->Set(false);
+				((TMainForm *)p)->ExitTube->Caption = "Выгон трубы";
+				frConverter->stopRotation();
+				((TMainForm *)p)->ExitTube->Tag = 0;
+				((TMainForm *)p)->SetControlsAble(true);
+				return 0;
+        }
 	}
 }
 
@@ -704,22 +730,37 @@ void __fastcall TMainForm::ExitTubeClick(TObject *Sender)
 {
 if(0 == ExitTube->Tag)
 {
+		if(!a1730->iCC->Get())
+		{
+		StatusBarBottom->Panels->Items[2]->Text = "Включите цепи управления";
+		StatusBarBottom->Refresh();
+			  return;
+		}
+
+		bool bLongControl = a1730->iCONTROL->Get();
+		if(!bLongControl)
+		{
+			StatusBarBottom->Panels->Items[2]->Text = "Нет сигнала \"КОНТРОЛЬ\"";
+			StatusBarBottom->Refresh();
+			return;
+		}
+
+		StatusBarBottom->Panels->Items[2]->Text = "";
+		StatusBarBottom->Refresh();
+
 		int speed = ini->ReadInteger("Type_" + Globals_typesize.name, "WorkSpeed", 4);
 		if (frConverter->setParameterSpeed(Globals_defaultRotParameter, speed))
 		{
 			ExitTube->Caption = "СТОП вращения";
 			ExitTube->Tag = 1;
 			frConverter->startRotation();
-			Sleep(1000);
+			SetControlsAble(false);
+			ExitTube->Enabled = true;
 			a1730->oWORK->Set(true);
 			Sleep(1000);
 			CloseHandle(CreateThread(NULL, 0, TestInputBitCycle3, this, 0, NULL));
 			dprint("ExitTubeClick\n");
-		} else
-		{
-			pr("Не удалось выставить рабочую скорость вращения!");
-			dprint("ExitTubeClick err\n");
-		}
+		} 
 }else
 {
 	SetEvent(hEvent);

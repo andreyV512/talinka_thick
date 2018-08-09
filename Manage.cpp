@@ -195,6 +195,11 @@ void __fastcall TManageForm::bRotationClick(TObject *Sender)
 			StatusBarBottom->Refresh();
 			return;
 		}
+		else
+		{
+			StatusBarBottom->Panels->Items[0]->Text = "";
+			StatusBarBottom->Refresh();
+        }
 		if (!frConverter->startRotation())
 		{
 			TPr::pr("frConverter->startRotation false");
@@ -203,6 +208,11 @@ void __fastcall TManageForm::bRotationClick(TObject *Sender)
 			StatusBarBottom->Refresh();
 			return;
 		}
+		else
+		{
+            StatusBarBottom->Panels->Items[0]->Text = "";
+			StatusBarBottom->Refresh();
+        }
 		DWORD startTick = GetTickCount();
 		bool started = false;
 		for (; ;)

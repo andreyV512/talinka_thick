@@ -136,8 +136,10 @@ private:
 	TestMode* testMode;
 
 	// блокировка
+	public:
 	void SetControlsAble(bool state, TButton *exc1 = NULL, TMenuItem *exc2 = NULL,
 			 TButton *exc3 = NULL, TButton *exc4 = NULL );	// блокировать или разблокировать кнопки
+			 private:
 	void PutSummaryResultOnChart(std::vector<double> thickness );	// рисует данные на графике
 	bool test_timer;
 	int TestZoneSize;
