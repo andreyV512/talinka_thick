@@ -192,6 +192,7 @@ void TMainForm::LoadSettings(void)
 // ---------------------------------------------------------------------------
 void __fastcall TMainForm::FormDestroy(TObject *Sender)
 {
+frConverter->stopRotation();
 	Sleep(1000);
 #ifndef NODEVICES
    //	a1730->oPCHPOW->Set(false);
@@ -520,6 +521,7 @@ void TMainForm::SetControlsAble(bool state,TButton *exc1,TMenuItem *exc2,
 	bWork->Enabled=state;
 	bManage->Enabled=state;
 	bCancelWork->Enabled=!state;
+	ExitTube->Enabled = state;
 
 	eMin_Good_Length->Enabled=state;
 	eThicknessBorder1->Enabled=state;
@@ -595,7 +597,7 @@ void __fastcall TMainForm::ClearCharts(void)
 	pLength->Visible=false;
 	pVelocity->Visible=false;
 	// Globals_isView = false;
-	Caption="БУРАН-5000. Ультразвуковой контроль толщины стенки НКТ.";
+	Caption="УРАН-3000 №1046 Ультразвуковой контроль толщины стенки НКТ.";
 	Refresh();
 	MainFormInit(this);
 }
@@ -688,7 +690,7 @@ DWORD WINAPI TestInputBitCycle3(PVOID p)
 	while(true)
 	{
 		DWORD res = WaitForSingleObject(((TMainForm *)p)->hEvent, 500);
-		/*
+	  //	/*
 		switch(res)
 		{
 			case WAIT_TIMEOUT:
@@ -700,6 +702,8 @@ DWORD WINAPI TestInputBitCycle3(PVOID p)
 				frConverter->stopRotation();
 				((TMainForm *)p)->ExitTube->Tag = 0;
 				((TMainForm *)p)->SetControlsAble(true);
+		 //		StatusBarBottom->Panels->Items[2]->Text = "";
+		  //	StatusBarBottom->Refresh();
 				return 0;
                }
 			}
@@ -710,10 +714,13 @@ DWORD WINAPI TestInputBitCycle3(PVOID p)
 				frConverter->stopRotation();
 				((TMainForm *)p)->ExitTube->Tag = 0;
 				((TMainForm *)p)->SetControlsAble(true);
+			 //	StatusBarBottom->Panels->Items[2]->Text = "";
+		   //	StatusBarBottom->Refresh();
 				return 0;
 
 		}
-		*/
+	   //	*/
+		/*
 		if(WAIT_TIMEOUT == res && !a1730->iCONTROL->Get() || WAIT_OBJECT_0 == res)
 		{
            		a1730->oWORK->Set(false);
@@ -722,7 +729,8 @@ DWORD WINAPI TestInputBitCycle3(PVOID p)
 				((TMainForm *)p)->ExitTube->Tag = 0;
 				((TMainForm *)p)->SetControlsAble(true);
 				return 0;
-        }
+		}
+		*/
 	}
 }
 

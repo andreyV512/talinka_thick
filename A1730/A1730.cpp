@@ -334,7 +334,7 @@ void A1730::Alarm(void)
 {
 	if (!IsAlarm)
 		return;
-	if (iPCHA->WasConst0(false, 50))
+	if (iPCHA->WasConst0(false, 100))
 	{
 		Latchterminate0("Ошибка частотника! Нет сигнала ПЧ А");
 		IsAlarm = false;

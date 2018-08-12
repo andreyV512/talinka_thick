@@ -169,6 +169,7 @@ void __fastcall TManageForm::FormDestroy(TObject *Sender)
 	delete mod_wrk;
 	delete mod_mvg;
 	SaveFormPos(this, ini);
+	frConverter->stopRotation();
 }
 // ---------------------------------------------------------------------------
 

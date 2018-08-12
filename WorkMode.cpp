@@ -176,6 +176,7 @@ void WorkThreadClass::WorkMode(void)
 				reason = "Не дождались снятия сигнала \"Контроль\"!";
 			break;
 		}
+        a1730->Clear();
 		pr("Перестали ловить стробы");
 		a1730->SetOnFront(NULL);
 		pr("Перестали контролировать аварии");
