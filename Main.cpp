@@ -619,6 +619,13 @@ void __fastcall TMainForm::TimerZoneTimer(TObject *Sender)
 		pr("Получили новую зону");
 		thickness.push_back(zone->thickness_median);
 		PutSummaryResultOnChart(thickness);
+
+		AnsiString a="oTestZones[";
+			a+=zone->nn;
+			a+="]=";
+			a+=zone->thickness_median;
+			pr(a);
+
 		double sms_thickness_median=zone->thickness_median;
 		a1730->oSTROBE->Set(true);
 		if(DrawResults::IsBrak(zone->thickness_median))
