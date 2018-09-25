@@ -301,8 +301,7 @@ void __fastcall TMainForm::bTestClick(TObject *Sender)
 	int TestTime=ini->ReadInteger("Default","TestTime_s",10);
 	//int TestZoneSize = ini->ReadInteger("Default", "TestZoneSize", 100);
 
-	//thickness.clear();
-	thickness.erase(thickness.begin(), thickness.begin()+thickness.size());
+	thickness.clear();
 	pr("Блокируем форму");
 	SetControlsAble(false,NULL,NULL);
 	ClearCharts();
