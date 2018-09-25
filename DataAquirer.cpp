@@ -26,19 +26,19 @@ void __fastcall DataAcquirer::Execute()
 		if (card->Read(data))
 		{
 			rawStrobes->Add(data,GetTickCount());
-			dprint("lan ok\n");
+			//dprint("lan ok\n");
 		}
 		else
 		{
 			pr("DataAcquirer::Execute: Ошибка приема данных");
 			a1730->Latchterminate("Ошибка приема данных");
 			a1730->SetLatchError();
-			dprint("lan err\n");
+		   //	dprint("lan err\n");
 			break;
 		}
 		if (Terminated)
 		{
-		dprint("lan terminated\n");
+		//dprint("lan terminated\n");
 			break;
 		}
 	}
