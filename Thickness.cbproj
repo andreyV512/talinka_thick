@@ -84,7 +84,7 @@
 			<ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_3)'!=''">
-			<BCC_Defines>NO1730;NO_ADCBOARDS;$(BCC_Defines)</BCC_Defines>
+			<BCC_Defines>__NO1730;__NO_ADCBOARDS;$(BCC_Defines)</BCC_Defines>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_2)'!=''">
 			<BCC_wmls>false</BCC_wmls>

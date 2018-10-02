@@ -223,7 +223,7 @@ Zone* RawStrobes::GetNewZone(void)
 		lcomplete = complete;
 	} cs->Leave();
 	result->AddZone(ret, zone_size, lcomplete);
-	if(result->zone.Count() < 3) return NULL;
+	if(result->zone.Count() < 3) ret = NULL;
 	if (ret != NULL||lcomplete)
 	{
 		AnsiString a = "RS: GetNewZone: [";
