@@ -17,7 +17,7 @@ A1730::A1730(int _DevNum, AnsiString _file_name, TIniFile* _ini)
 	instantDiCtrl = AdxInstantDiCtrlCreate();
 	instantDoCtrl = AdxInstantDoCtrlCreate();
 	DeviceInformation devInfo(_DevNum);
-//	DeviceInformation devInfo(L"PCIE-1730,BID#1");
+	//	DeviceInformation devInfo(L"PCIE-1730,BID#1");
 	errorCode = instantDiCtrl->setSelectedDevice(devInfo);
 	if (BioFailed(errorCode))
 		throw(Exception
@@ -31,7 +31,7 @@ A1730::A1730(int _DevNum, AnsiString _file_name, TIniFile* _ini)
 		_ini->WriteBool("Default", "InversePCHA", false);
 	if (!_ini->ValueExists("Default", "InversePCHRUN"))
 		_ini->WriteBool("Default", "InversePCHRUN", false);
-//---------------------------------------------
+	//---------------------------------------------
 	period = 50;
 	cs = new TCriticalSection();
 
@@ -76,7 +76,7 @@ A1730::A1730(int _DevNum, AnsiString _file_name, TIniFile* _ini)
 
 	//oPCHPOW = Find("Питание ПЧ");
 	oSCANPOW = Find("Питание СУ");
-   //	oSOLPOW = Find("Питание соленоид");
+	//	oSOLPOW = Find("Питание соленоид");
 	oWORK = Find("Работа");
 	oMEAS = Find("Измерение");
 	oSHIFT = Find("Перекладка");
@@ -86,7 +86,7 @@ A1730::A1730(int _DevNum, AnsiString _file_name, TIniFile* _ini)
 	oSTF = Find("STF");
 	oRL  = Find("RL");
 	oRM  = Find("RM");
-    oRH  = Find("RH");
+	oRH  = Find("RH");
 
 	alarmCycleOn = false;
 	OnFront = NULL;
@@ -138,7 +138,7 @@ DWORD A1730::Read(void)
 		throw(Exception("A1730::ReadIn: не могу прочитать плату"));
 	DWORD v = buf[0] + (buf[1] << 8) + (buf[2] << 16) + (buf[3] << 24);
 	return (v);
- // 00000000 00001000 00000001
+	// 00000000 00001000 00000001
 }
 DWORD A1730::ReadOut(void)
 {
@@ -218,57 +218,55 @@ void A1730::ReadSignals(void)
 			}
 		}
 
-///////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////
 
 		if(!beginControl && iSQ1->value)
 		{
-		beginControl = tick;
+			beginControl = tick;
 			dprint("beginControl %d\n", tick);
 		}
-		if(!endControl && iCONTROL->value)
-		{
-			endControl = tick;
-			speedTube = (double)baseWidth/(endControl - beginControl);
-			dprint("SpeedTube %f\n", speedTube);
-		}
 
-		if(currentControl > 0)
+		if(iCONTROL->value)
 		{
-		double t = speedTube * (int)(tick - currentControl);
-		if(!iSTROBE->value && t > 200)
-		{
-			currentControl += int((400.0 - t) / speedTube);
-			iSTROBE->value = true;
-			iSTROBE->value_prev = false;
-				iSTROBE->last_changed = tick;
-				dprint("ON %d\n", tick);
-		}  else if(iSTROBE->value && t > 100)
-		{
-			iSTROBE->value = false;
-			iSTROBE->value_prev = true;
-				iSTROBE->last_changed = tick;
-				dprint("OFF %d\n", tick);
-		}
-		}
-		else if(iCONTROL->value)
-		{
-			double t = speedTube * (int)(tick - beginControl);
-			iSTROBE->value = false;
-			iSTROBE->value_prev = true;
-			if(t > 800)
+			if(!endControl)
 			{
-				currentControl = tick;
-				dprint("currentControl %d\n", tick);
-            }
+				endControl = tick;
+				speedTube = (double)baseWidth/(endControl - beginControl);
+				dprint("SpeedTube %f\n", speedTube);
+			}
+			if(currentControl > 0)
+			{
+				double t = speedTube * (int)(tick - currentControl);
+				if(!iSTROBE->value && t > 200)
+				{
+					currentControl += int((400.0 - t) / speedTube);
+					iSTROBE->value = true;
+					iSTROBE->value_prev = false;
+					iSTROBE->last_changed = tick;
+					dprint("ON %d\n", tick);
+				}
+				else if(iSTROBE->value && t > 100)
+				{
+					iSTROBE->value = false;
+					iSTROBE->value_prev = true;
+					iSTROBE->last_changed = tick;
+					dprint("OFF %d\n", tick);
+				}
+			}
+			else
+			{
+				double t = speedTube * (int)(tick - beginControl);
+				iSTROBE->value = false;
+				iSTROBE->value_prev = true;
+				iSTROBE->last_changed = tick;
+				if(t > 800)
+				{
+					currentControl = tick;
+					dprint("currentControl %d\n", tick);
+				}
+			}
 		}
-	   /*
-		if(iCONTROL->value && 0 != currentControl)
-		{
-			currentControl = 0;
-			dprint("Stop %d\n", tick);
-        }
-        */
-/////////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////
 
 		Alarm();
 		SendFront(tick);
@@ -330,7 +328,7 @@ AnsiString A1730::Wait(bool _value, CSignal* _signal, DWORD _tm)
 			ret = "Не дождались";
 		else
 		{
-//			Latch* zzz = lp;
+			//			Latch* zzz = lp;
 			ret = lp->reason;
 		}
 		_signal->event->ResetEvent();
