@@ -235,16 +235,18 @@ void A1730::ReadSignals(void)
 		if(currentControl > 0)
 		{
 		double t = speedTube * (int)(tick - currentControl);
-		if(t > 200)
+		if(!iSTROBE->value && t > 200)
 		{
 			currentControl += int((400.0 - t) / speedTube);
 			iSTROBE->value = true;
 			iSTROBE->value_prev = false;
+				iSTROBE->last_changed = tick;
 				dprint("ON %d\n", tick);
-		}  else if(t > 100)
+		}  else if(iSTROBE->value && t > 100)
 		{
 			iSTROBE->value = false;
 			iSTROBE->value_prev = true;
+				iSTROBE->last_changed = tick;
 				dprint("OFF %d\n", tick);
 		}
 		}
@@ -259,13 +261,13 @@ void A1730::ReadSignals(void)
 				dprint("currentControl %d\n", tick);
             }
 		}
-
+	   /*
 		if(iCONTROL->value && 0 != currentControl)
 		{
 			currentControl = 0;
 			dprint("Stop %d\n", tick);
         }
-
+        */
 /////////////////////////////////////////////////////////////////////
 
 		Alarm();
