@@ -104,6 +104,7 @@ void A1730::Clear()
 {
 	speedTube = 0.36;
 	beginControl = currentControl = delayControl = endControl = 0;
+	counter = 0;
 }
 
 __fastcall A1730::~A1730(void)
@@ -236,14 +237,15 @@ void A1730::ReadSignals(void)
 			}
 			if(currentControl > 0)
 			{
-				double t = speedTube * (int)(tick - currentControl);
+				double t = speedTube * (tick - currentControl);
 				if(!iSTROBE->value && t > 200)
 				{
 					currentControl += int((400.0 - t) / speedTube);
 					iSTROBE->value = true;
 					iSTROBE->value_prev = false;
-					dprint("ON %d\n", tick - iSTROBE->last_changed);
+					dprint("%d  ON %d\n", counter, tick - iSTROBE->last_changed);
 					iSTROBE->last_changed = tick;
+					++counter;
 				}
 				else if(iSTROBE->value && t > 100)
 				{

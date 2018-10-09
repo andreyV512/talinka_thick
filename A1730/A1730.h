@@ -84,6 +84,7 @@ public:
 	double speedTube;
 	unsigned beginControl, endControl, delayControl, currentControl;
 	int baseWidth;
+	int counter;
 
 	inline int SignalCount(void)
 	{
