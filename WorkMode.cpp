@@ -131,6 +131,7 @@ void WorkThreadClass::WorkMode(void)
 		pr("выставляем сигнал Работа");
 		a1730->oWORK->Set(true);
 		pr("Стартуем платы");
+		a1730->Clear();
 		da0 = new DataAcquirer(adcboards->board0, rawStrobes);
 		da1 = new DataAcquirer(adcboards->board1, rawStrobes);
 		Synchronize(ClearCharts);

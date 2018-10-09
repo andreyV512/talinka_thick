@@ -241,12 +241,12 @@ void A1730::ReadSignals(void)
 			iSTROBE->value_prev = true;
 		}
 		}
-		else
+		else if(iCONTROL->value)
 		{
 			double t = speedTube * (int)(tick - beginControl);
-			if(t > 1200)
+			if(t > 800)
 			{
-                currentControl = tick;
+				currentControl = tick;
             }
         }
 
