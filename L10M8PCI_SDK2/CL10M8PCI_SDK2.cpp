@@ -253,7 +253,7 @@ bool CL10M8PCI_SDK2::Read(char* _buf)
 	}
 	else
 	{
-		dprint("Lan read Ok %x\n");
+	  //	dprint("Lan read Ok %x\n");
     }
 	device->Stop();
 
