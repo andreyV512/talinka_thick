@@ -584,6 +584,8 @@ void TMainForm::PutSummaryResultOnChart(std::vector <double> thickness)
 void __fastcall TMainForm::FormClose(TObject *Sender,TCloseAction &Action)
 {
 	// a1730->oPCHPOW->Set(false);
+	if(workthread!=NULL)
+		workthread->Terminate();
 }
 
 // ---------------------------------------------------------------------------
