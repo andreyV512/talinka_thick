@@ -79,6 +79,7 @@ void WorkThreadClass::WorkMode(void)
 		stext2 = "Ждем сигнал Цикл";
 		pr(stext2);
 		Synchronize(UpdateMainForm);
+
 		reason = a1730->iCYCLE->Wait(true, 600000);
 		if (reason != "Ok")
 		{
@@ -91,7 +92,7 @@ void WorkThreadClass::WorkMode(void)
 		a1730->AlarmCycleOn(true);
 		pr("Выставили перекладку");
 		a1730->oSHIFT->Set(true);
-
+         a1730->Clear();
 		stext2 = "Ожидание трубы на входе в установку (сигнал \"Готовность\")";
 		Synchronize(UpdateMainForm);
 		reason = a1730->iREADY->Wait(true, INFINITE);
@@ -176,7 +177,7 @@ void WorkThreadClass::WorkMode(void)
 				reason = "Не дождались снятия сигнала \"Контроль\"!";
 			break;
 		}
-        a1730->Clear();
+		a1730->Clear();
 		pr("Перестали ловить стробы");
 		a1730->SetOnFront(NULL);
 		pr("Перестали контролировать аварии");

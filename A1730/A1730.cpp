@@ -244,7 +244,7 @@ void A1730::ReadSignals(void)
 		else
 		{
 			double t = speedTube * (int)(tick - beginControl);
-			if(t > 400)
+			if(t > 1200)
 			{
                 currentControl = tick;
             }
