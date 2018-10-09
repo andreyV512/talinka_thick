@@ -246,6 +246,7 @@ void A1730::ReadSignals(void)
 					dprint("%d  ON %d\n", counter, tick - iSTROBE->last_changed);
 					iSTROBE->last_changed = tick;
 					++counter;
+					SendFront(tick);
 				}
 				else if(iSTROBE->value && t > 100)
 				{
@@ -271,7 +272,7 @@ void A1730::ReadSignals(void)
 		/////////////////////////////////////////////////////////////////////
 
 		Alarm();
-		SendFront(tick);
+	 //	SendFront(tick);
 		Latch* lp;
 		for (int i = 0; i < L.Count(); i++)
 		{
