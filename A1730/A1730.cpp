@@ -97,6 +97,7 @@ A1730::A1730(int _DevNum, AnsiString _file_name, TIniFile* _ini)
 
 	speedTube = 0.36;
 	beginControl = currentControl = delayControl =  endControl = 0;
+	M.L->Remove(iSTROBE);
 }
 
 void A1730::Clear()

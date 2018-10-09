@@ -9,7 +9,7 @@
 template<class T>
 class CRListT
 {
-private:
+public:
 	TList* L;
 
 public:
