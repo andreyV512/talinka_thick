@@ -245,6 +245,8 @@ void A1730::ReadSignals(void)
 		else if(iCONTROL->value)
 		{
 			double t = speedTube * (int)(tick - beginControl);
+			iSTROBE->value = false;
+			iSTROBE->value_prev = true;
 			if(t > 800)
 			{
 				currentControl = tick;
