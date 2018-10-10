@@ -262,7 +262,7 @@ void A1730::ReadSignals(void)
 				iSTROBE->value = false;
 				iSTROBE->value_prev = true;
 				iSTROBE->last_changed = tick;
-				if(t > 200)
+				if(t > 400)
 				{
 					currentControl = tick;
 					dprint("currentControl %d\n", tick);

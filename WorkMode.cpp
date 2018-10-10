@@ -148,12 +148,13 @@ void WorkThreadClass::WorkMode(void)
 		Synchronize(UpdateMainForm);
 		pr("включаем питание сканирующего");
 		a1730->oSCANPOW->Set(true);
-		while(0 == a1730->currentControl)Sleep(10);
-		rawStrobes->StartTick(a1730->currentControl);
+		//while(0 == a1730->currentControl)Sleep(10);
+	  //	rawStrobes->StartTick(a1730->currentControl);
 		pr("Начали ловить стробы");
 	 //	a1730->SetOnFront(AddTickStrobe);
 		pr("Ждем первого строба");
 		reason = a1730->iSTROBE->Wait(true, 5000);
+		rawStrobes->StartTick(a1730->currentControl);
 		if (reason != "Ok")
 		{
 			if (reason == "Не дождались")
