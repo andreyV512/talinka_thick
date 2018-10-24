@@ -289,7 +289,9 @@ void TViewTubeDetailsForm::ShowPeaks()
 void __fastcall TViewTubeDetailsForm::MeasureChartMouseWheelDown(TObject *Sender,
 	TShiftState Shift,TPoint &MousePos,bool &Handled)
 {
+	if(--x_curr_measure % 5 != 0) return;
 	curr_measure--;
+	dprint("curr_measure--, d\n", curr_measure);
 	PutDataOnCharts(curr_zone,curr_sensor,curr_measure);
 }
 // ---------------------------------------------------------------------------
@@ -297,7 +299,9 @@ void __fastcall TViewTubeDetailsForm::MeasureChartMouseWheelDown(TObject *Sender
 void __fastcall TViewTubeDetailsForm::MeasureChartMouseWheelUp(TObject *Sender,
 	TShiftState Shift,TPoint &MousePos,bool &Handled)
 {
+	if(--x_curr_measure % 5 != 0) return;
 	curr_measure++;
+	dprint("curr_measure++, d\n", curr_measure);
 	PutDataOnCharts(curr_zone,curr_sensor,curr_measure);
 }
 // ---------------------------------------------------------------------------

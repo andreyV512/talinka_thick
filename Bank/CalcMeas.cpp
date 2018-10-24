@@ -27,7 +27,7 @@ CalcMeas::~CalcMeas(void)
 void __fastcall CalcMeas::Exec(Meas* _meas)
 {
 	computeAcf(_meas);
-	findPeaks(_meas);
+   //	findPeaks(_meas);
 	computeThickness(_meas);
 }
 
@@ -185,7 +185,7 @@ void CalcMeas::computeThickness(Meas* _meas)
 		yPeaks[i] = _meas->acfPeaks[i].Y;
 	}
 	_meas->thCode = maths[logic]->thickness_detect(&xPeaks[0], &yPeaks[0],
-		Npeaks, &_meas->thickness, _meas->n_sensor, energy,_meas->data,_meas->GetSize(),&_meas->dj);
+		Npeaks, &_meas->thickness, _meas->n_sensor, energy,_meas->data,_meas->GetSize(), _meas->acf);//&_meas->dj);
 	if(_meas->thickness!=0)
 		_meas->thickness=(double)Math::RoundTo(_meas->thickness,-2);
 }

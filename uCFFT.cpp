@@ -219,15 +219,40 @@ void CFFT::Calc(char* _buf)
 {
 	if(!CFFT_256)
 		ZeroMemory(&BUF[size],sizeof(double)*(n-size));
-	for(int z=0;z<size;++z)
-		BUF[z]=_buf[z];
+	for(int z=0;z<size;++z) BUF[z]=_buf[z];
+	{
+		int middle = size / 2;
+		int i = 0;
+		double dy = 2.0 / middle;
+		for(; i < middle; ++i)
+		{
+			BUF[i] *= dy * i;
+		}
+		for(; i < size; ++i)
+		{
+			BUF[i] *= 1 - dy * (i - middle);
+		}
+    }
 	Direct(BUF);
 	Spectrum(BUF);
 	CopyMemory(BUF_spectro,BUF,sizeof(double)*size);
-	if(acfBorderLeft!=0)
+	if(acfBorderLeft!=0 && acfBorderRight<size)
+	{
 		ZeroMemory(BUF,sizeof(double) * acfBorderLeft);
-	if(acfBorderRight<size)
 		ZeroMemory(BUF+acfBorderRight,sizeof(double) * (size-acfBorderRight));
+		int middle = (acfBorderRight - acfBorderLeft) / 2;
+		int i = acfBorderLeft;
+		double dy = 2.0 / middle;
+		int end = acfBorderLeft + middle;
+		for(; i < end; ++i)
+		{
+			BUF[i] *= dy * i;
+		}
+		for(; i < acfBorderRight; ++i)
+		{
+			BUF[i] *= 1 - dy * (i - end);
+		}
+	}
 	Direct(BUF);
 	Spectrum(BUF);
 }

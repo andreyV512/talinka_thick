@@ -27,6 +27,7 @@ void mathematics::setParameters(RThickness::MathSettings ms)
 	precision = ms.Precision();
 	minThickness = ms.MinThickness();
 	maxThickness = ms.MaxThickness();
+	maxThickness = ms.MaxThickness();
 	minPeaksCount = ms.MinPeaksCount();
 	int sensors = ms.SensorCount();
 	for (int i = 0; i < sensors; i++)
@@ -299,24 +300,26 @@ void mathEKE::find_peaks(const double y[], const int32_t Ny, int32_t x_peaks[],
 }
 
 // ---------------------------------------------------------------------------
+#define NOUSED
 th_status mathEKE::thickness_detect(const int32_t x_peaks[], double y_peaks[],
-	const int32_t Npeaks, double* thickness, int sensorNo, double energy, char* _data,
+	const int32_t Npeaks, double* thickness, int sensorNo, double energy, char* _xdata,
 	int _data_size, double* _dj)
 {
 	// Пока полагаем, что неопределённая толщина равна максимальной
-	*thickness = maxThickness;
+	*thickness = maxThickness;//Globals_typesize.borders[0] + 1.23;
 
 //	if (!computeDJ(_data, _data_size, sensorNo, _dj))
 //		return (TH_DJ);
+
+#ifndef NOUSED
 	if (maxPeaks[sensorNo] != 0)
 	{
 		if (Npeaks > maxPeaks[sensorNo])
 			return TH_MAXIMUM_PEAKS;
 	}
-	if (energy < minEnergy[sensorNo])
-		return TH_SMALL_ENERGY;
-	if (energy > maxEnergy[sensorNo])
-		return TH_BIG_ENERGY;
+	if (energy < minEnergy[sensorNo]) return TH_SMALL_ENERGY;
+	if (energy > maxEnergy[sensorNo]) return TH_BIG_ENERGY;
+
 	if (Npeaks == 0)
 		return TH_SMALL_MAXIMUM;
 	double ymax = 0;
@@ -335,9 +338,57 @@ th_status mathEKE::thickness_detect(const int32_t x_peaks[], double y_peaks[],
 		return (TH_DJ);
 	*thickness = adc2mm(x_peaks[imax], calibCoeffs[sensorNo].a,
 		calibCoeffs[sensorNo].b);
-	return TH_OK;
+	return  TH_OK;
+#else
+	if (energy < minEnergy[sensorNo]) return TH_SMALL_ENERGY;
+	if (energy > maxEnergy[sensorNo]) return TH_BIG_ENERGY;
+	//energyToMax    TH_MAXIMUM_TO_ENERGY
+	int left = int((minThickness - calibCoeffs[sensorNo].b) / calibCoeffs[sensorNo].a);
+	int right = int((maxThickness - calibCoeffs[sensorNo].b) / calibCoeffs[sensorNo].a);
+	double thresh = _dj[0] * energyToMax[sensorNo];
+	double minVal = _dj[0];
+	for(int i = 1; i < left; ++i)
+	{
+		if(minVal > _dj[i]) minVal = _dj[i];
+	}
+	double maxVal = minVal;
+	int minOffs = left;
+	int maxOffs = left;
+	int offsVal = left;
+	double val = 0;
+	for(int i = left; i < right; ++i)
+	{
+		if(minVal > _dj[i])
+		{
+			minVal = _dj[i];
+			minOffs = i;
+			if(minOffs > maxOffs)
+			{
+				minVal = maxVal = _dj[i];
+				continue;
+			}
+		}
+		if(maxVal < _dj[i])
+		{
+			maxVal = _dj[i];
+			maxOffs = i;
+		}
+		double t = maxVal - minVal;
+		if(val < t)
+		{
+			val = t;
+			offsVal = i;
+		}
+	}
+	if(val > thresh)
+	{
+		*thickness = adc2mm(offsVal, calibCoeffs[sensorNo].a,calibCoeffs[sensorNo].b);
+		return TH_OK;
+	}
+	return TH_MAXIMUM_TO_ENERGY;
+#endif
 }
-
+#undef NOUSED
 // ---------------------------------------------------------------------------
 bool mathEKE::computeDJ(char* _data, int _size, int _sensor,double* _dj)
 {

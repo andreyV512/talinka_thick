@@ -82,7 +82,7 @@ __published: // IDE-managed Components
 	void __fastcall SBSFClick(TObject *Sender);
 
 private: // User declarations
-
+	int x_curr_measure;
 	int curr_zone; // номер зоны, которую смотрим
 	int curr_sensor; // номер датчика, который смотрим
 	int curr_measure; // номер измерения, которое смотрим
