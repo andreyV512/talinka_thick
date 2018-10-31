@@ -180,9 +180,9 @@ th_status mathGAK::thickness_detect(const int32_t x_peaks[], double y_peaks[],
 	const int32_t Npeaks, double* thickness, int sensorNo, double energy, char* _data,
 	int _data_size, double* _dj)
 {
-	// *thickness = UNDETECTED_THICKNESS;
+	 *thickness = UNDETECTED_THICKNESS;
 	// Пока полагаем, что неопределённая толщина равна максимальной
-	*thickness = maxThickness;
+	//*thickness = maxThickness;
 	double a = calibCoeffs[sensorNo].a;
 	double b = calibCoeffs[sensorNo].b;
 
