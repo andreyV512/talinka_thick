@@ -48,7 +48,8 @@ WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 		// освобождаем мьютекс.
 		ReleaseMutex(hMutex);
         //для закрытия в windows 8
-		WinExec("taskkill /f /im Thickness.exe", SW_HIDE);
+		//WinExec("taskkill /f /im Thickness.exe", SW_HIDE);
+		ExitProcess(0);
 	}
 	catch (Exception &exception)
 	{

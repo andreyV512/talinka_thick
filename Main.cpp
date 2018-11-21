@@ -700,6 +700,7 @@ DWORD WINAPI TestInputBitCycle3(PVOID p)
 			{
 			   if(!a1730->iCONTROL->Get())
 			   {
+			   dprint("WAIT_TIMEOUT\n");
 				a1730->oWORK->Set(false);
 				((TMainForm *)p)->ExitTube->Caption = "Выгон трубы";
 				frConverter->stopRotation();
@@ -712,6 +713,7 @@ DWORD WINAPI TestInputBitCycle3(PVOID p)
 			}
 			break;
 			case WAIT_OBJECT_0:
+			dprint("WAIT_OBJECT_0\n");
 				a1730->oWORK->Set(false);
 				((TMainForm *)p)->ExitTube->Caption = "Выгон трубы";
 				frConverter->stopRotation();
@@ -739,10 +741,13 @@ DWORD WINAPI TestInputBitCycle3(PVOID p)
 
 void __fastcall TMainForm::ExitTubeClick(TObject *Sender)
 {
+dprint("ExitTubeClick\n");
 if(0 == ExitTube->Tag)
 {
+dprint("0 == ExitTube->Tag\n");
 		if(!a1730->iCC->Get())
 		{
+		dprint("!a1730->iCC->Get()\n");
 		StatusBarBottom->Panels->Items[2]->Text = "Включите цепи управления";
 		StatusBarBottom->Refresh();
 			  return;
@@ -751,6 +756,7 @@ if(0 == ExitTube->Tag)
 		bool bLongControl = a1730->iCONTROL->Get();
 		if(!bLongControl)
 		{
+		dprint("!bLongControl\n");
 			StatusBarBottom->Panels->Items[2]->Text = "Нет сигнала \"КОНТРОЛЬ\"";
 			StatusBarBottom->Refresh();
 			return;
@@ -762,6 +768,7 @@ if(0 == ExitTube->Tag)
 		int speed = ini->ReadInteger("Type_" + Globals_typesize.name, "WorkSpeed", 4);
 		if (frConverter->setParameterSpeed(Globals_defaultRotParameter, speed))
 		{
+		dprint("frConverter->setParameterSpeed(Globals_defaultRotParameter, speed)\n");
 			ExitTube->Caption = "СТОП вращения";
 			ExitTube->Tag = 1;
 			frConverter->startRotation();
